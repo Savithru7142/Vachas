@@ -1,12 +1,8 @@
-from datetime import timedelta
 
 from django.core.management.base import BaseCommand
-from django.utils import timezone
 
 from apps.accounts.models import ClubMembership, Profile, User
-from apps.announcements.models import Announcement
-from apps.events.models import Event
-from apps.publications.models import Publication, PublicationCategory
+from apps.publications.models import PublicationCategory
 from apps.wings.models import Wing
 
 
@@ -208,98 +204,6 @@ class Command(BaseCommand):
                     f'Category: {category.name}'
                 )
             )
-
-        # ============================================================
-        # 4. FEATURED PUBLICATION
-        # ============================================================
-
-        publication, created = Publication.objects.update_or_create(
-            slug='the-silence-between-us',
-            defaults={
-                'title': 'The Silence Between Us',
-                'author': member,
-                'pen_name': 'Ananya S.',
-                'category': categories['poem'],
-                'wing': wings['english'],
-                'status': Publication.Status.PUBLISHED,
-                'excerpt': (
-                    'Sometimes, silence speaks the loudest. '
-                    'Sometimes, it breaks everything.'
-                ),
-                'content': '''Sometimes, silence speaks the loudest.
-Sometimes, it breaks everything.
-
-In the quiet corners of forgotten afternoons,
-words unsaid gather like dust on window panes.
-
-We sat across the wooden table,
-watching the tea grow cold,
-measuring the distance between our thoughts
-in the spaces between each breath.
-
-A pen poised above paper,
-waiting for courage to spill into ink.''',
-                'published_at': timezone.now(),
-            },
-        )
-
-        self.stdout.write(
-            self.style.SUCCESS(
-                f'Publication: {publication.title}'
-            )
-        )
-
-        # ============================================================
-        # 5. ANNOUNCEMENT
-        # ============================================================
-
-        announcement, created = Announcement.objects.update_or_create(
-            title='Open Mic Registrations Now Open!',
-            defaults={
-                'body': (
-                    'Showcase your talent at our annual Open Mic event. '
-                    'Registrations are now open for poetry, storytelling, '
-                    'and acoustic performances.'
-                ),
-                'audience': Announcement.Audience.PUBLIC,
-                'is_published': True,
-                'created_by': member,
-            },
-        )
-
-        self.stdout.write(
-            self.style.SUCCESS(
-                f'Announcement: {announcement.title}'
-            )
-        )
-
-        # ============================================================
-        # 6. WELCOME EVENT
-        # ============================================================
-        # No Poetry Slam event is created here.
-
-        Event.objects.get_or_create(
-            slug='welcome-meet',
-            defaults={
-                'title': 'Welcome Meet',
-                'description': (
-                    'Join us for our literature club welcome session.'
-                ),
-                'date': timezone.now().date()
-                + timedelta(days=14),
-                'venue': 'Club Hall',
-                'status': Event.Status.REGISTRATION_OPEN,
-                'is_public': True,
-                'organizer': lead,
-                'created_by': lead,
-            },
-        )
-
-        self.stdout.write(
-            self.style.SUCCESS(
-                'Welcome event created.'
-            )
-        )
 
         # ============================================================
         # DONE
