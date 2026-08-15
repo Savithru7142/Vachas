@@ -1,0 +1,76 @@
+{% load static %}
+<nav class="site-nav sticky top-0 z-50 border-b border-line bg-paper/95 backdrop-blur-md">
+    <div class="v-container flex h-20 items-center justify-between">
+        <!-- Logo Lockup -->
+        <a href="{% url 'core:home' %}" class="flex items-center gap-3.5 group">
+            <img src="{% static 'img/logo/vachas-logo.png' %}" alt="Vachas Logo" class="h-11 w-11 rounded-full object-contain transition-transform group-hover:scale-105">
+            <div class="flex flex-col leading-none">
+                <span class="font-serif text-2xl font-bold tracking-tight text-ink">Vachas</span>
+                <span class="text-[9px] font-sans font-semibold tracking-[0.2em] text-smoke uppercase mt-1">THE LITERATURE CLUB</span>
+            </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <div class="hidden items-center gap-8 lg:flex">
+            <a href="{% url 'core:home' %}" class="v-nav-link {% if request.resolver_match.url_name == 'home' %}v-nav-link-active{% endif %}">HOME</a>
+            <a href="{% url 'wings:list' %}" class="v-nav-link {% if 'wings' in request.path %}v-nav-link-active{% endif %}">WINGS</a>
+            <a href="{% url 'publications:list' %}" class="v-nav-link {% if 'publications' in request.path %}v-nav-link-active{% endif %}">PUBLICATIONS</a>
+            <a href="{% url 'events:list' %}" class="v-nav-link {% if 'events' in request.path %}v-nav-link-active{% endif %}">EVENTS</a>
+            <a href="{% url 'gallery:list' %}" class="v-nav-link {% if 'gallery' in request.path %}v-nav-link-active{% endif %}">GALLERY</a>
+            <a href="{% url 'core:about' %}" class="v-nav-link {% if request.resolver_match.url_name == 'about' %}v-nav-link-active{% endif %}">ABOUT</a>
+            <a href="{% url 'core:contact' %}" class="v-nav-link {% if request.resolver_match.url_name == 'contact' %}v-nav-link-active{% endif %}">CONTACT</a>
+        </div>
+
+        <!-- Auth CTA Actions -->
+        <div class="hidden items-center gap-5 lg:flex shrink-0">
+            {% if user.is_authenticated %}
+                <a href="{% url 'accounts:profile' %}" class="text-xs font-semibold uppercase tracking-wider text-charcoal hover:text-ink">
+                    {{ user.display_name|default:user.username }}
+                </a>
+                {% if user.is_lead %}
+                <a href="{% url 'lead:dashboard' %}" class="v-btn-sm v-btn-secondary">Dashboard</a>
+                {% else %}
+                <a href="{% url 'member:dashboard' %}" class="v-btn-sm v-btn-secondary">Dashboard</a>
+                {% endif %}
+                {% include "components/logout_form.html" with button_class="text-xs uppercase tracking-wider text-smoke hover:text-ink" %}
+            {% else %}
+                <a href="{% url 'accounts:login' %}" class="text-xs font-semibold uppercase tracking-wider text-charcoal hover:text-ink">Login</a>
+                <a href="{% url 'accounts:register' %}" class="v-btn v-btn-sm px-6 py-2.5">JOIN US</a>
+            {% endif %}
+        </div>
+
+        <!-- Mobile Menu Hamburger -->
+        <button id="mobile-menu-toggle" class="lg:hidden p-2 rounded text-ink focus:outline-none" aria-label="Open menu" aria-expanded="false">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div id="mobile-nav" class="hidden border-t border-line bg-paper lg:hidden">
+        <div class="v-container flex flex-col gap-4 py-6">
+            <a href="{% url 'core:home' %}" class="v-nav-link text-sm">Home</a>
+            <a href="{% url 'wings:list' %}" class="v-nav-link text-sm">Wings</a>
+            <a href="{% url 'publications:list' %}" class="v-nav-link text-sm">Publications</a>
+            <a href="{% url 'events:list' %}" class="v-nav-link text-sm">Events</a>
+            <a href="{% url 'gallery:list' %}" class="v-nav-link text-sm">Gallery</a>
+            <a href="{% url 'core:about' %}" class="v-nav-link text-sm">About</a>
+            <a href="{% url 'core:contact' %}" class="v-nav-link text-sm">Contact</a>
+            <div class="pt-4 border-t border-line flex flex-col gap-3">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'accounts:profile' %}" class="text-xs uppercase font-medium">Profile ({{ user.display_name|default:user.username }})</a>
+                    {% if user.is_lead %}
+                    <a href="{% url 'lead:dashboard' %}" class="v-btn-secondary text-center">Lead Dashboard</a>
+                    {% else %}
+                    <a href="{% url 'member:dashboard' %}" class="v-btn-secondary text-center">Member Dashboard</a>
+                    {% endif %}
+                    {% include "components/logout_form.html" with button_class="text-xs uppercase text-smoke" %}
+                {% else %}
+                    <a href="{% url 'accounts:login' %}" class="v-btn-secondary text-center">Login</a>
+                    <a href="{% url 'accounts:register' %}" class="v-btn text-center">JOIN US</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>

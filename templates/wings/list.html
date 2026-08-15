@@ -1,0 +1,17 @@
+{% extends "base/public_base.html" %}
+{% block title %}Wings — {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<section class="v-section">
+    <div class="v-container">
+        <h1 class="font-serif text-5xl">Our Wings</h1>
+        <p class="mt-4 max-w-2xl text-lg text-smoke">Language wings and operational teams that give THE VACHAS its voice.</p>
+        <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {% for wing in wings %}
+            {% include "components/wing_card.html" %}
+            {% empty %}
+            <div class="v-empty col-span-full">Wings coming soon.</div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

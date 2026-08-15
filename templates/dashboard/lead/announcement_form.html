@@ -1,0 +1,17 @@
+{% extends "dashboard/lead/base.html" %}
+{% block page_title %}{{ title }}{% endblock %}
+{% block content %}
+<form method="post" class="max-w-2xl space-y-6">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="space-y-2">
+        <label class="v-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+        {% if field.errors %}
+        <div class="text-red-600 text-sm">{{ field.errors }}</div>
+        {% endif %}
+    </div>
+    {% endfor %}
+    <button type="submit" class="v-btn">Save</button>
+</form>
+{% endblock %}

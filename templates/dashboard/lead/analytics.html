@@ -1,0 +1,17 @@
+{% extends "dashboard/lead/base.html" %}
+{% block page_title %}Analytics{% endblock %}
+{% block content %}
+<div class="grid gap-6 md:grid-cols-2">
+    <div class="v-card">
+        <h2 class="font-serif text-xl mb-4">Members by Role</h2>
+        {% for role, count in members_by_role.items %}
+        <div class="flex justify-between py-2 border-b border-line"><span>{{ role }}</span><span class="font-mono">{{ count }}</span></div>
+        {% endfor %}
+    </div>
+    <div class="v-card space-y-4">
+        <div class="flex justify-between"><span>Published Works</span><span class="font-serif text-2xl">{{ publications_published }}</span></div>
+        <div class="flex justify-between"><span>Total Events</span><span class="font-serif text-2xl">{{ events_total }}</span></div>
+        <div class="flex justify-between"><span>Total Wings</span><span class="font-serif text-2xl">{{ wings_total }}</span></div>
+    </div>
+</div>
+{% endblock %}

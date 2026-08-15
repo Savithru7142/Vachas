@@ -1,0 +1,77 @@
+<div class="v-table-wrapper">
+    <table class="v-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Status</th>
+                {% if show_developer_col %}<th>Developer</th>{% endif %}
+                <th>Joined</th>
+                <th class="text-right">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for u in users %}
+            <tr>
+                <td class="font-medium text-ink">
+                    <div class="flex items-center gap-2.5">
+                        <span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-paper-warm text-xs font-semibold text-charcoal border border-line">
+                            {{ u.display_name|slice:":1"|upper }}
+                        </span>
+                        <span>{{ u.display_name }}</span>
+                    </div>
+                </td>
+                <td class="text-xs font-mono text-smoke">@{{ u.username }}</td>
+                <td class="text-xs text-charcoal">{{ u.email|default:"—" }}</td>
+                <td>
+                    {% if u.club_membership %}
+                        <span class="text-xs font-medium text-charcoal">{{ u.club_membership.get_role_display }}</span>
+                    {% else %}
+                        <span class="text-xs text-smoke">No membership</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if u.club_membership %}
+                        {% if u.club_membership.is_active %}
+                            <span class="v-badge v-badge-active">Active</span>
+                        {% else %}
+                            <span class="v-badge v-badge-pending">Pending</span>
+                        {% endif %}
+                    {% else %}
+                        <span class="text-smoke text-xs">—</span>
+                    {% endif %}
+                </td>
+                {% if show_developer_col %}
+                <td>
+                    <span class="text-xs font-mono">{% if u.is_developer %}Yes{% else %}No{% endif %}</span>
+                </td>
+                {% endif %}
+                <td class="text-xs font-mono text-smoke">{{ u.date_joined|date:"M d, Y" }}</td>
+                <td class="text-right space-x-3 whitespace-nowrap">
+                    <a href="{% url edit_url_name u.pk %}" class="v-link text-xs">Edit</a>
+                    {% if delete_url_name %}
+                    <form method="post" action="{% url delete_url_name u.pk %}" class="inline">
+                        {% csrf_token %}
+                        <button type="submit" class="v-link-danger text-xs" onclick="return confirm('Delete this user?')">Delete</button>
+                    </form>
+                    {% endif %}
+                    {% if u.club_membership and not u.club_membership.is_active %}
+                    <form method="post" action="{% url approve_url_name u.pk %}" class="inline">
+                        {% csrf_token %}
+                        <button type="submit" class="v-btn-sm v-btn text-xs ml-1">Approve</button>
+                    </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="{% if show_developer_col %}8{% else %}7{% endif %}" class="text-smoke text-center py-8">
+                    No users found.
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

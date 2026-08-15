@@ -1,0 +1,22 @@
+{% extends "dashboard/lead/base.html" %}
+{% block page_title %}Contact Messages{% endblock %}
+{% block content %}
+<p class="text-sm text-smoke mb-6">Messages sent through the public contact form.</p>
+<div class="space-y-4">
+    {% for msg in messages_list %}
+    <div class="v-card">
+        <div class="flex items-start justify-between gap-4 mb-2">
+            <div>
+                <p class="font-medium">{{ msg.name }}</p>
+                <p class="text-xs text-smoke">{{ msg.email }}</p>
+            </div>
+            <p class="text-xs font-mono text-smoke">{{ msg.created_at|date:"M d, Y H:i" }}</p>
+        </div>
+        <p class="text-sm font-medium">{{ msg.subject }}</p>
+        <p class="mt-2 text-sm text-charcoal">{{ msg.message }}</p>
+    </div>
+    {% empty %}
+    <div class="v-empty">No contact messages yet.</div>
+    {% endfor %}
+</div>
+{% endblock %}

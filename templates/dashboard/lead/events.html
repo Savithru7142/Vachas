@@ -1,0 +1,103 @@
+{% extends "dashboard/lead/base.html" %}
+{% block page_title %}Events{% endblock %}
+{% block content %}
+<div class="mb-6 flex items-center justify-between gap-3">
+    <a href="{% url 'lead:event_create' %}" class="v-btn">Create Event</a>
+    <a href="{% url 'lead:events_completed' %}" class="v-btn-sm v-btn-secondary">Completed Events</a>
+</div>
+
+<div class="mb-8">
+    <h2 class="font-serif text-2xl mb-4 text-ink">Upcoming Events</h2>
+    <div class="v-table-wrapper">
+        <table class="v-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Venue</th>
+                    <th>Registrations</th>
+                    <th class="text-right">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in events %}
+                <tr>
+                    <td class="font-medium text-ink">{{ event.title }}</td>
+                    <td class="font-mono text-xs text-smoke whitespace-nowrap">{{ event.date|date:"M d, Y" }}</td>
+                    <td>
+                        <span class="v-badge 
+                            {% if event.status == 'REGISTRATION_OPEN' %}v-badge-active
+                            {% elif event.status == 'PUBLISHED' %}v-badge-info
+                            {% elif event.status == 'COMPLETED' %}v-badge-outline
+                            {% elif event.status == 'CANCELLED' %}v-badge-danger
+                            {% else %}v-badge-pending{% endif %}">
+                            {{ event.get_status_display }}
+                        </span>
+                    </td>
+                    <td class="text-xs text-charcoal">{{ event.venue }}</td>
+                    <td class="font-mono text-xs">
+                        <a href="{% url 'lead:event_registrations' event.pk %}" class="v-link font-semibold">
+                            {{ event.registration_count }} {% if event.registration_count == 1 %}entry{% else %}entries{% endif %}
+                        </a>
+                    </td>
+                    <td class="text-right space-x-3 whitespace-nowrap">
+                        <a href="{% url 'lead:event_edit' event.pk %}" class="v-link text-xs">Edit</a>
+                        <form method="post" action="{% url 'lead:event_delete' event.pk %}" class="inline">
+                            {% csrf_token %}
+                            <button type="submit" class="v-link-danger text-xs" onclick="return confirm('Delete this event?')">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="6" class="text-smoke text-center py-8">No active events yet.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% if completed_events %}
+<div>
+    <h2 class="font-serif text-2xl mb-4 text-ink">Completed Events</h2>
+    <div class="v-table-wrapper">
+        <table class="v-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Venue</th>
+                    <th>Registrations</th>
+                    <th class="text-right">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in completed_events %}
+                <tr>
+                    <td class="font-medium text-ink">{{ event.title }}</td>
+                    <td class="font-mono text-xs text-smoke whitespace-nowrap">{{ event.date|date:"M d, Y" }}</td>
+                    <td>
+                        <span class="v-badge v-badge-outline">{{ event.get_status_display }}</span>
+                    </td>
+                    <td class="text-xs text-charcoal">{{ event.venue }}</td>
+                    <td class="font-mono text-xs">
+                        <a href="{% url 'lead:event_registrations' event.pk %}" class="v-link">
+                            {{ event.registration_count }}
+                        </a>
+                    </td>
+                    <td class="text-right space-x-3 whitespace-nowrap">
+                        <a href="{% url 'lead:event_edit' event.pk %}" class="v-link text-xs">Edit</a>
+                        <form method="post" action="{% url 'lead:event_delete' event.pk %}" class="inline">
+                            {% csrf_token %}
+                            <button type="submit" class="v-link-danger text-xs" onclick="return confirm('Delete this completed event?')">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

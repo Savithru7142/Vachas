@@ -1,0 +1,28 @@
+{% load vachas_tags %}
+{% extends "dashboard/core/base.html" %}
+{% block page_title %}Resources{% endblock %}
+{% block content %}
+<div class="mb-6"><a href="{% dash_url 'resource_upload' %}" class="v-btn">Upload Resource</a></div>
+<div class="v-table-wrapper">
+    <table class="v-table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Audience</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in resources %}
+            <tr>
+                <td class="font-medium text-ink">{{ r.title }}</td>
+                <td><span class="v-badge-outline text-xs">{{ r.get_audience_display }}</span></td>
+                <td class="text-xs font-mono text-smoke whitespace-nowrap">{{ r.created_at|date:"M d, Y" }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="3" class="text-smoke text-center py-8">No resources.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

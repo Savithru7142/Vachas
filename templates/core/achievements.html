@@ -1,0 +1,29 @@
+{% extends "base/public_base.html" %}
+{% block title %}Achievements — {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<section class="v-section">
+    <div class="v-container">
+        <p class="text-xs uppercase tracking-wider text-smoke">Our legacy</p>
+        <h1 class="mt-2 font-serif text-5xl">Achievements</h1>
+        <p class="mt-4 max-w-2xl text-lg text-smoke">Milestones and honors earned by THE VACHAS literature club.</p>
+        <div class="mt-12 grid gap-8 md:grid-cols-2">
+            {% for item in achievements %}
+            <article class="v-card flex gap-6">
+                {% if item.image %}
+                <img src="{{ item.image.url }}" alt="{{ item.title }}" class="h-24 w-24 shrink-0 object-cover border border-line">
+                {% else %}
+                <div class="flex h-24 w-24 shrink-0 items-center justify-center bg-paper-warm border border-line font-serif text-2xl">§</div>
+                {% endif %}
+                <div>
+                    <h2 class="font-serif text-2xl">{{ item.title }}</h2>
+                    {% if item.year %}<p class="text-xs uppercase tracking-wider text-smoke mt-1">{{ item.year }}</p>{% endif %}
+                    <p class="mt-3 text-sm leading-relaxed text-charcoal">{{ item.description }}</p>
+                </div>
+            </article>
+            {% empty %}
+            <div class="v-empty col-span-full">Achievements will be documented here.</div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% load vachas_tags %}
+{% extends "dashboard/core/base.html" %}
+{% block page_title %}Publications Review{% endblock %}
+{% block content %}
+<div class="v-table-wrapper">
+    <table class="v-table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Status</th>
+                <th class="text-right">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pub in publications %}
+            <tr>
+                <td class="font-medium text-ink">{{ pub.title }}</td>
+                <td class="text-xs text-charcoal">{{ pub.author_display }}</td>
+                <td>
+                    <span class="v-badge 
+                        {% if pub.status == 'PUBLISHED' or pub.status == 'APPROVED' %}v-badge-active
+                        {% elif pub.status == 'REJECTED' %}v-badge-danger
+                        {% else %}v-badge-pending{% endif %}">
+                        {{ pub.get_status_display }}
+                    </span>
+                </td>
+                <td class="text-right whitespace-nowrap">
+                    <a href="{% dash_url 'publication_review' pub.pk %}" class="v-link text-xs">Review</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="4" class="text-smoke text-center py-8">No submissions to review.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "dashboard/core/base.html" %}
+{% block page_title %}Analytics{% endblock %}
+{% block content %}
+<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+    <div class="v-stat-card"><p class="text-xs uppercase text-smoke">Members</p><p class="font-serif text-3xl mt-2">{{ member_count }}</p></div>
+    <div class="v-stat-card"><p class="text-xs uppercase text-smoke">Publications</p><p class="font-serif text-3xl mt-2">{{ publication_count }}</p></div>
+    <div class="v-stat-card"><p class="text-xs uppercase text-smoke">Events</p><p class="font-serif text-3xl mt-2">{{ event_count }}</p></div>
+    <div class="v-stat-card"><p class="text-xs uppercase text-smoke">Tasks</p><p class="font-serif text-3xl mt-2">{{ task_count }}</p></div>
+</div>
+{% endblock %}

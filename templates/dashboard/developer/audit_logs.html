@@ -1,0 +1,28 @@
+{% extends "dashboard/developer/base.html" %}
+{% block page_title %}Audit Logs{% endblock %}
+{% block content %}
+<div class="v-table-wrapper">
+    <table class="v-table">
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Actor</th>
+                <th>Action</th>
+                <th>Target</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in logs %}
+            <tr>
+                <td class="text-xs font-mono text-smoke whitespace-nowrap">{{ log.created_at|date:"M d, Y H:i" }}</td>
+                <td class="font-medium text-ink">{% if log.actor %}@{{ log.actor.username }}{% else %}<span class="text-smoke">—</span>{% endif %}</td>
+                <td><span class="v-badge-outline font-mono text-xs">{{ log.action }}</span></td>
+                <td class="text-xs font-mono text-charcoal">{{ log.target_model }} <span class="text-smoke">#{{ log.target_id }}</span></td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="4" class="text-smoke text-center py-8">No audit logs recorded.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

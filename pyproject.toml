@@ -1,0 +1,24 @@
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+exclude = [
+    ".venv",
+    "node_modules",
+    "**/migrations/*",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = [
+    "E501",  # line too long
+    "RUF012",  # Mutable class attributes (Django models/forms convention)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"config/settings/*" = ["F403", "F405"]
+"scripts/*" = ["E402"]
+"restore_old_*.py" = ["E402"]
+"setup_demo_users.py" = ["E402"]
+
+[tool.ruff.lint.isort]
+combine-as-imports = true

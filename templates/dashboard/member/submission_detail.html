@@ -1,0 +1,20 @@
+{% extends "dashboard/member/base.html" %}
+{% block page_title %}{{ publication.title }}{% endblock %}
+{% block content %}
+<div class="max-w-3xl">
+    <div class="flex flex-wrap gap-2 mb-4">
+        <span class="v-badge-outline">{{ publication.get_status_display }}</span>
+        {% if publication.wing %}<span class="v-badge-outline">{{ publication.wing.name }}</span>{% endif %}
+    </div>
+    <h2 class="font-serif text-3xl">{{ publication.title }}</h2>
+    <p class="text-xs text-smoke mt-2 uppercase tracking-wider">Submitted {{ publication.created_at|date:"F d, Y" }}</p>
+    {% if publication.review_notes %}
+    <div class="v-card mt-6 border-ink">
+        <p class="v-label">Reviewer Notes</p>
+        <p class="text-sm">{{ publication.review_notes }}</p>
+    </div>
+    {% endif %}
+    <div class="mt-8 whitespace-pre-wrap leading-relaxed text-charcoal">{{ publication.content }}</div>
+    <a href="{% url 'member:submissions' %}" class="mt-8 inline-block v-link text-sm uppercase tracking-wider">← Back to Submissions</a>
+</div>
+{% endblock %}

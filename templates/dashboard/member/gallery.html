@@ -1,0 +1,66 @@
+{% extends "dashboard/member/base.html" %}
+{% block page_title %}Gallery{% endblock %}
+{% block content %}
+<div class="mb-8">
+    <h2 class="font-serif text-2xl mb-2">Photo Gallery</h2>
+    <p class="text-sm text-smoke">Explore our community moments and memories</p>
+</div>
+
+{% if items %}
+<div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-8">
+    {% for item in items %}
+    <div class="group relative overflow-hidden rounded-lg shadow-sm hover:shadow-md transition-all duration-300 bg-white border border-line">
+        <div class="aspect-[4/3] overflow-hidden bg-smoke flex items-center justify-center">
+            {% if item.image %}
+            <img 
+                src="{{ item.image.url }}" 
+                alt="{{ item.title|default:'Gallery image' }}" 
+                class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+            >
+            {% else %}
+            <div class="text-smoke text-center px-4">
+                <p class="text-xs">No image</p>
+            </div>
+            {% endif %}
+        </div>
+        
+        <!-- Caption Overlay on Hover -->
+        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-colors duration-300 flex flex-col items-center justify-end p-4 opacity-0 group-hover:opacity-100">
+            {% if item.title or item.caption %}
+            <p class="text-white text-sm font-medium text-center line-clamp-3">
+                {{ item.title|default:item.caption|truncatewords:12 }}
+            </p>
+            {% endif %}
+            {% if item.uploaded_by %}
+            <p class="text-white/80 text-xs mt-2">by {{ item.uploaded_by.display_name }}</p>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Pagination -->
+{% if is_paginated %}
+<div class="flex items-center justify-center gap-2 mt-8">
+    {% if page_obj.has_previous %}
+    <a href="?page=1" class="v-link text-sm">&laquo; First</a>
+    <a href="?page={{ page_obj.previous_page_number }}" class="v-link text-sm">Previous</a>
+    {% endif %}
+    
+    <span class="text-sm text-smoke px-2">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+    </span>
+    
+    {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}" class="v-link text-sm">Next</a>
+    <a href="?page={{ page_obj.paginator.num_pages }}" class="v-link text-sm">Last &raquo;</a>
+    {% endif %}
+</div>
+{% endif %}
+
+{% else %}
+<div class="v-empty">
+    <p>Gallery coming soon.</p>
+</div>
+{% endif %}
+{% endblock %}

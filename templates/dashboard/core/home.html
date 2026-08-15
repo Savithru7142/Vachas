@@ -1,0 +1,17 @@
+{% extends "dashboard/core/base.html" %}
+{% block page_title %}Core Dashboard{% endblock %}
+{% block content %}
+<div class="grid gap-6 md:grid-cols-4 mb-8">
+    <div class="v-stat-card"><p class="text-xs uppercase text-smoke">Total Users</p><p class="font-serif text-3xl mt-2">{{ total_users }}</p></div>
+    <div class="v-stat-card"><p class="text-xs uppercase text-smoke">Pending Reviews</p><p class="font-serif text-3xl mt-2">{{ pending_reviews }}</p></div>
+    <div class="v-stat-card"><p class="text-xs uppercase text-smoke">Open Tasks</p><p class="font-serif text-3xl mt-2">{{ open_tasks }}</p></div>
+    <div class="v-stat-card"><p class="text-xs uppercase text-smoke">Pending Members</p><p class="font-serif text-3xl mt-2">{{ pending_members }}</p></div>
+</div>
+
+<div class="flex items-center justify-between mb-6">
+    <h2 class="font-serif text-2xl">All Users</h2>
+    <a href="{% url 'core_team:members' %}" class="v-btn-sm v-btn-secondary">Manage All Users</a>
+</div>
+
+{% include "components/users_table.html" with edit_url_name="core_team:member_edit" approve_url_name="core_team:member_approve" %}
+{% endblock %}

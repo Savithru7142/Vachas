@@ -1,0 +1,18 @@
+{% extends "dashboard/developer/base.html" %}
+{% block page_title %}System Overview{% endblock %}
+{% block content %}
+<p class="text-xs uppercase tracking-wider text-smoke mb-6 font-mono">Developer Dashboard — System Administration</p>
+<div class="grid gap-6 md:grid-cols-3 lg:grid-cols-4 mb-8">
+    <div class="v-stat-card"><p class="text-xs uppercase text-smoke">Total Users</p><p class="font-serif text-3xl mt-2">{{ total_users }}</p></div>
+    <div class="v-stat-card"><p class="text-xs uppercase text-smoke">General Users</p><p class="font-serif text-3xl mt-2">{{ general_users }}</p></div>
+    <div class="v-stat-card"><p class="text-xs uppercase text-smoke">Club Members</p><p class="font-serif text-3xl mt-2">{{ members }}</p></div>
+    <div class="v-stat-card"><p class="text-xs uppercase text-smoke">Developers</p><p class="font-serif text-3xl mt-2">{{ developers }}</p></div>
+</div>
+
+<div class="flex items-center justify-between mb-6">
+    <h2 class="font-serif text-2xl">All Users</h2>
+    <a href="{% url 'developer:users' %}" class="v-btn-sm v-btn-secondary">Manage All Users</a>
+</div>
+
+{% include "components/users_table.html" with edit_url_name="developer:user_edit" approve_url_name="developer:user_approve" show_developer_col=True %}
+{% endblock %}

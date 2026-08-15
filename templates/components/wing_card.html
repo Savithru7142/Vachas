@@ -1,0 +1,8 @@
+<a href="{{ wing.get_absolute_url }}" class="v-card-editorial group block p-8">
+    <span class="v-badge-outline">{{ wing.get_wing_type_display }}</span>
+    <h3 class="mt-4 font-serif text-2xl group-hover:underline">{{ wing.name }}</h3>
+    <p class="mt-3 text-sm leading-relaxed text-smoke line-clamp-3">
+        {{ wing.excerpt|default:wing.description|truncatewords:30 }}
+    </p>
+    <span class="mt-6 inline-block text-xs uppercase tracking-wider text-ink">Explore →</span>
+</a>

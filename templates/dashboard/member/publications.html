@@ -1,0 +1,9 @@
+{% extends "dashboard/member/base.html" %}
+{% block page_title %}Publications{% endblock %}
+{% block content %}
+<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {% for publication in publications %}
+    {% include "components/publication_card.html" %}
+    {% empty %}<div class="v-empty col-span-full">No published works.</div>{% endfor %}
+</div>
+{% endblock %}

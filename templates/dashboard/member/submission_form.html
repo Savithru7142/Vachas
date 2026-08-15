@@ -1,0 +1,15 @@
+{% extends "dashboard/member/base.html" %}
+{% block page_title %}{{ title }}{% endblock %}
+{% block content %}
+<form method="post" enctype="multipart/form-data" class="max-w-2xl space-y-6">
+    {% csrf_token %}
+    {% for field in form %}
+    <div>
+        <label class="v-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+        {% if field.errors %}<p class="mt-1 text-sm">{{ field.errors.0 }}</p>{% endif %}
+    </div>
+    {% endfor %}
+    <button type="submit" class="v-btn">Submit for Review</button>
+</form>
+{% endblock %}

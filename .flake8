@@ -1,0 +1,9 @@
+[flake8]
+max-line-length = 120
+exclude = .venv,node_modules,*/migrations/*,__pycache__
+ignore = E501,W503
+per-file-ignores =
+    config/settings/*: F403,F405
+    scripts/*: E402
+    restore_old_*.py: E402
+    setup_demo_users.py: E402

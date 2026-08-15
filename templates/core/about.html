@@ -1,0 +1,19 @@
+{% extends "base/public_base.html" %}
+{% block title %}About — {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<section class="v-section">
+    <div class="v-container max-w-3xl">
+        <p class="text-xs uppercase tracking-wider text-smoke">Our Story</p>
+        <h1 class="mt-2 font-serif text-5xl">About {{ SITE_NAME }}</h1>
+        <div class="mt-8 space-y-6 text-lg leading-relaxed text-charcoal">
+            <p>{{ SITE_NAME }} is a university literature club dedicated to the power of words, voice, and expression across languages and cultures.</p>
+            <p>We publish creative writing, host literary events, and build a community where Telugu, Hindi, English, and other voices find space to be heard.</p>
+            <p>From poetry nights to open mics, from editorial publications to cultural programs — we are the digital home of a living literary community.</p>
+        </div>
+        <div class="mt-12 flex gap-4">
+            <a href="{% url 'core:team' %}" class="v-btn-secondary">Meet the Team</a>
+            <a href="{% url 'core:contact' %}" class="v-btn">Contact Us</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

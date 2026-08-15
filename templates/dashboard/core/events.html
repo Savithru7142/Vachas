@@ -1,0 +1,41 @@
+{% load vachas_tags %}
+{% extends "dashboard/core/base.html" %}
+{% block page_title %}Events{% endblock %}
+{% block content %}
+<div class="mb-6"><a href="{% dash_url 'event_create' %}" class="v-btn">Create Event</a></div>
+<div class="v-table-wrapper">
+    <table class="v-table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Venue</th>
+                <th class="text-right">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in events %}
+            <tr>
+                <td class="font-medium text-ink">{{ event.title }}</td>
+                <td class="font-mono text-xs text-smoke whitespace-nowrap">{{ event.date|date:"M d, Y" }}</td>
+                <td>
+                    <span class="v-badge 
+                        {% if event.status == 'REGISTRATION_OPEN' %}v-badge-active
+                        {% elif event.status == 'PUBLISHED' %}v-badge-info
+                        {% elif event.status == 'COMPLETED' %}v-badge-outline
+                        {% elif event.status == 'CANCELLED' %}v-badge-danger
+                        {% else %}v-badge-pending{% endif %}">
+                        {{ event.get_status_display }}
+                    </span>
+                </td>
+                <td class="text-xs text-charcoal">{{ event.venue }}</td>
+                <td class="text-right whitespace-nowrap"><a href="{% dash_url 'event_edit' event.pk %}" class="v-link text-xs">Edit</a></td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="5" class="text-smoke text-center py-8">No events.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

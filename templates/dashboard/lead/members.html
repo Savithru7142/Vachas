@@ -1,0 +1,19 @@
+{% extends "dashboard/lead/base.html" %}
+{% block page_title %}All Users{% endblock %}
+{% block content %}
+<div class="flex flex-col gap-4 mb-6 md:flex-row md:items-end md:justify-between">
+    <div>
+        <h2 class="font-serif text-2xl">All Users</h2>
+        <p class="text-sm text-smoke mt-1">Club members and leads. Assign Member or Club Lead roles.</p>
+    </div>
+    <div class="flex items-center gap-3">
+        <a href="{% url 'lead:member_add' %}" class="v-btn">Add User</a>
+        {% if pending_members %}
+        <p class="text-sm"><span class="v-badge-outline">{{ pending_members }} pending approval</span></p>
+        {% endif %}
+    </div>
+</div>
+
+{% include "components/users_filter.html" with clear_url=clear_url %}
+{% include "components/users_table.html" with edit_url_name="lead:member_edit" approve_url_name="lead:member_approve" delete_url_name="lead:member_delete" %}
+{% endblock %}

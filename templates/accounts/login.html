@@ -1,0 +1,35 @@
+{% extends "base/public_base.html" %}
+{% load static %}
+{% block title %}Login — {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<section class="v-section">
+    <div class="v-container max-w-md mx-auto">
+        <div class="text-center mb-8">
+            <img src="{% static 'img/logo/vachas-logo.png' %}" alt="Vachas Logo" class="mx-auto h-16 w-16 mb-4 rounded-full shadow-sm object-contain">
+            <h1 class="font-serif text-3xl">Welcome Back</h1>
+            <p class="mt-2 text-sm text-smoke">Sign in to your Vachas account</p>
+        </div>
+        <form method="post" class="v-card space-y-6">
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+            <div class="v-alert v-alert-error">{{ form.non_field_errors.0 }}</div>
+            {% endif %}
+            <div>
+                <label class="v-label" for="id_username">Username</label>
+                {{ form.username }}
+            </div>
+            <div>
+                <label class="v-label" for="id_password">Password</label>
+                {{ form.password }}
+            </div>
+            <button type="submit" class="v-btn w-full">Sign In</button>
+        </form>
+        <p class="mt-6 text-center text-sm text-smoke">
+            <a href="{% url 'accounts:password_reset' %}" class="v-link">Forgot password?</a>
+        </p>
+        <p class="mt-2 text-center text-sm text-smoke">
+            Don't have an account? <a href="{% url 'accounts:register' %}" class="v-link">Register</a>
+        </p>
+    </div>
+</section>
+{% endblock %}

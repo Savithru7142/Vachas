@@ -1,0 +1,19 @@
+<form method="get" class="v-card mb-6 flex flex-col gap-4 md:flex-row md:items-end">
+    <div class="flex-1">
+        <label class="v-label" for="q">Search</label>
+        <input type="search" name="q" id="q" value="{{ search_query }}" class="v-input" placeholder="Name, username, or email">
+    </div>
+    <div>
+        <label class="v-label" for="status">Status</label>
+        <select name="status" id="status" class="v-input">
+            <option value="">All</option>
+            <option value="active" {% if status_filter == 'active' %}selected{% endif %}>Active</option>
+            <option value="pending" {% if status_filter == 'pending' %}selected{% endif %}>Pending</option>
+            <option value="none" {% if status_filter == 'none' %}selected{% endif %}>No membership</option>
+        </select>
+    </div>
+    <button type="submit" class="v-btn-sm v-btn">Filter</button>
+    {% if search_query or status_filter %}
+    <a href="{{ clear_url }}" class="v-link text-sm">Clear</a>
+    {% endif %}
+</form>

@@ -1,0 +1,291 @@
+{% extends "base/public_base.html" %}
+{% load static %}
+
+{% block title %}Vachas — The Literature Club | Where Words Find Voice{% endblock %}
+{% block meta_description %}Vachas is more than a club. It's a stage for ideas, emotions, and expressions that shape us.{% endblock %}
+
+{% block content %}
+<!-- HERO SECTION -->
+<section class="relative overflow-hidden border-b border-line bg-paper pt-8 pb-16 md:pt-16 md:pb-24">
+    <div class="v-container">
+        <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
+            <!-- Hero Left Content -->
+            <div class="lg:col-span-6 z-10">
+                <div class="max-w-xl">
+                    <h1 class="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight text-ink">
+                        Where<br>
+                        Words<br>
+                        Find Voice.
+                    </h1>
+                    <p class="mt-6 text-sm sm:text-base text-smoke max-w-md leading-relaxed font-sans">
+                        Vachas is more than a club. It's a stage for ideas, emotions, and expressions that shape us.
+                    </p>
+                    <div class="mt-8 flex flex-wrap items-center gap-6">
+                        <a href="#wings" class="v-btn-explore">EXPLORE</a>
+                        <a href="{% url 'publications:list' %}" class="v-btn-link group">
+                            OUR PUBLICATIONS 
+                            <span class="inline-block transition-transform duration-200 group-hover:translate-x-1">&rarr;</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Center/Right Artwork -->
+            <div class="lg:col-span-5 relative flex items-center justify-center">
+                <div class="relative w-full max-w-lg overflow-hidden rounded-lg border border-line/60 bg-white/40 p-2 shadow-sm backdrop-blur-sm">
+                    <img src="{% static 'img/hero-quill-hand.jpg' %}" 
+                         alt="Hand writing with quill and ink with flying letters turning into birds" 
+                         class="w-full h-auto object-cover rounded filter contrast-[1.02]">
+                </div>
+            </div>
+
+            <!-- Hero Far Right Badge & Scroll Widget -->
+            <div class="hidden lg:col-span-1 lg:flex flex-col items-center justify-between h-full min-h-[380px] py-2 border-l border-line/40 pl-4">
+                <div class="writing-vertical text-[11px] font-mono tracking-[0.25em] text-smoke/80 uppercase select-none">
+                    THE VACHAS LITERATURE CLUB
+                </div>
+                <a href="#wings" class="group flex flex-col items-center gap-1.5 border border-line bg-white px-2.5 py-3 rounded text-[10px] font-mono tracking-widest text-ink hover:border-ink hover:bg-ink hover:text-white transition-all shadow-sm">
+                    <svg class="h-4 w-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+                    </svg>
+                    <span class="text-center leading-tight">SCROLL<br>DOWN</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WINGS & FEATURED PUBLICATIONS SECTION -->
+<section id="wings" class="v-section bg-paper">
+    <div class="v-container">
+        <div class="grid grid-cols-1 gap-12 lg:grid-cols-12">
+            <!-- Left: Explore Our Wings -->
+            <div class="lg:col-span-6">
+                <div class="flex items-center justify-between mb-8">
+                    <h2 class="font-serif text-2xl md:text-3xl text-ink flex items-center gap-2">
+                        Explore Our Wings <span class="text-xl">🖋️</span>
+                    </h2>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4 sm:gap-6">
+                    <!-- Telugu Wing -->
+                    <a href="{% url 'wings:list' %}" class="v-wing-card rounded-lg">
+                        <div>
+                            <div class="font-serif text-3xl md:text-4xl text-ink font-semibold mb-2">కథ</div>
+                            <h3 class="text-xs font-bold uppercase tracking-wider text-ink">Telugu Wing</h3>
+                            <div class="w-6 h-[1px] bg-line my-3"></div>
+                            <p class="text-xs text-smoke leading-relaxed">
+                                Celebrating Telugu language and literature.
+                            </p>
+                        </div>
+                        <div class="mt-6 flex justify-end">
+                            <span class="text-sm font-medium text-ink transition-transform duration-200 group-hover:translate-x-1">&rarr;</span>
+                        </div>
+                    </a>
+
+                    <!-- Hindi Wing -->
+                    <a href="{% url 'wings:list' %}" class="v-wing-card rounded-lg">
+                        <div>
+                            <div class="font-serif text-3xl md:text-4xl text-ink font-semibold mb-2">अ</div>
+                            <h3 class="text-xs font-bold uppercase tracking-wider text-ink">Hindi Wing</h3>
+                            <div class="w-6 h-[1px] bg-line my-3"></div>
+                            <p class="text-xs text-smoke leading-relaxed">
+                                Expressions in Hindi, echoes of our roots.
+                            </p>
+                        </div>
+                        <div class="mt-6 flex justify-end">
+                            <span class="text-sm font-medium text-ink transition-transform duration-200 group-hover:translate-x-1">&rarr;</span>
+                        </div>
+                    </a>
+
+                    <!-- English Wing -->
+                    <a href="{% url 'wings:list' %}" class="v-wing-card rounded-lg">
+                        <div>
+                            <div class="font-serif text-3xl md:text-4xl text-ink font-semibold mb-2">A</div>
+                            <h3 class="text-xs font-bold uppercase tracking-wider text-ink">English Wing</h3>
+                            <div class="w-6 h-[1px] bg-line my-3"></div>
+                            <p class="text-xs text-smoke leading-relaxed">
+                                Ideas that inspire, words that connect.
+                            </p>
+                        </div>
+                        <div class="mt-6 flex justify-end">
+                            <span class="text-sm font-medium text-ink transition-transform duration-200 group-hover:translate-x-1">&rarr;</span>
+                        </div>
+                    </a>
+
+                    <!-- Content Team -->
+                    <a href="{% url 'wings:list' %}" class="v-wing-card rounded-lg">
+                        <div>
+                            <div class="text-3xl md:text-4xl text-ink font-semibold mb-2">
+                                <svg class="w-8 h-8 md:w-9 md:h-9" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2l2.5 7.5H22l-6 4.5 2.5 7.5-6.5-5-6.5 5 2.5-7.5-6-4.5h7.5z" opacity="0.1"/>
+                                    <path d="M3 21l3.75-1.25L18.5 8 16 5.5 4.25 17.25 3 21z M17.75 3.75c.39-.39 1.02-.39 1.41 0l1.09 1.09c.39.39.39 1.02 0 1.41l-1.34 1.34-2.5-2.5 1.34-1.34z"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-xs font-bold uppercase tracking-wider text-ink">Content Team</h3>
+                            <div class="w-6 h-[1px] bg-line my-3"></div>
+                            <p class="text-xs text-smoke leading-relaxed">
+                                Crafting thoughts, curating voices.
+                            </p>
+                        </div>
+                        <div class="mt-6 flex justify-end">
+                            <span class="text-sm font-medium text-ink transition-transform duration-200 group-hover:translate-x-1">&rarr;</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right: Featured Publications -->
+            <div class="lg:col-span-6">
+                <div class="flex items-center justify-between mb-8">
+                    <h2 class="font-serif text-2xl md:text-3xl text-ink">Featured Publications</h2>
+                    <a href="{% url 'publications:list' %}" class="v-btn-link text-xs">
+                        VIEW ALL &rarr;
+                    </a>
+                </div>
+
+                <div class="border border-line bg-white rounded-lg p-6 sm:p-8 shadow-sm">
+                    {% if featured_publications %}
+                        {% with pub=featured_publications.0 %}
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                            <div class="md:col-span-5 aspect-[4/5] bg-ink rounded overflow-hidden flex items-center justify-center text-white relative">
+                                {% if pub.cover_image %}
+                                <img src="{{ pub.cover_image.url }}" alt="{{ pub.title }}" class="w-full h-full object-cover">
+                                {% else %}
+                                <div class="p-6 text-center">
+                                    <span class="font-serif text-4xl block mb-2 text-white/80">§</span>
+                                    <span class="font-serif text-lg tracking-wide uppercase">{{ pub.title|truncatewords:4 }}</span>
+                                </div>
+                                {% endif %}
+                            </div>
+                            <div class="md:col-span-7 flex flex-col justify-between">
+                                <div>
+                                    <h3 class="font-serif text-2xl md:text-3xl text-ink leading-tight">
+                                        {{ pub.title }}
+                                    </h3>
+                                    <p class="mt-1 text-xs text-smoke uppercase tracking-wider">
+                                        By {{ pub.author_display }}
+                                    </p>
+                                    <div class="mt-3 flex flex-wrap gap-2">
+                                        {% if pub.category %}<span class="v-badge-outline">{{ pub.category.name }}</span>{% endif %}
+                                        {% if pub.wing %}<span class="v-badge-outline">{{ pub.wing.name }}</span>{% endif %}
+                                    </div>
+                                    <p class="mt-4 text-xs sm:text-sm text-smoke leading-relaxed line-clamp-3">
+                                        {{ pub.excerpt }}
+                                    </p>
+                                </div>
+                                <div class="mt-6">
+                                    <a href="{{ pub.get_absolute_url }}" class="v-btn-link">
+                                        READ MORE &rarr;
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endwith %}
+                    {% else %}
+                        <!-- Default Featured Piece matching the design mockup -->
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                            <div class="md:col-span-5 aspect-[4/5] bg-[#111111] rounded overflow-hidden flex flex-col items-center justify-center text-white p-6 text-center relative shadow-inner">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40 opacity-80"></div>
+                                <div class="relative z-10">
+                                    <div class="font-serif text-3xl mb-2 text-white/90">📖</div>
+                                    <p class="font-serif text-sm italic tracking-widest text-smoke">The Silence Between Us</p>
+                                </div>
+                            </div>
+                            <div class="md:col-span-7 flex flex-col justify-between">
+                                <div>
+                                    <h3 class="font-serif text-2xl md:text-3xl text-ink leading-tight">
+                                        The Silence Between Us
+                                    </h3>
+                                    <p class="mt-1 text-xs text-smoke uppercase tracking-wider">
+                                        By Ananya S.
+                                    </p>
+                                    <div class="mt-3 flex flex-wrap gap-2">
+                                        <span class="v-badge-outline">POEM</span>
+                                        <span class="v-badge-outline">ENGLISH</span>
+                                    </div>
+                                    <p class="mt-4 text-xs sm:text-sm text-smoke leading-relaxed italic">
+                                        "Sometimes, silence speaks the loudest. Sometimes, it breaks everything."
+                                    </p>
+                                </div>
+                                <div class="mt-6">
+                                    <a href="{% url 'publications:list' %}" class="v-btn-link">
+                                        READ MORE &rarr;
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    <!-- Carousel Dots -->
+                    <div class="mt-6 flex items-center justify-center gap-2">
+                        <span class="h-2 w-2 rounded-full bg-ink"></span>
+                        <span class="h-2 w-2 rounded-full bg-line"></span>
+                        <span class="h-2 w-2 rounded-full bg-line"></span>
+                        <span class="h-2 w-2 rounded-full bg-line"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- RABINDRANATH TAGORE QUOTE BANNER -->
+<section class="border-y border-line bg-[#0a0a0a] text-white py-14 md:py-20 relative overflow-hidden">
+    <div class="v-container relative z-10">
+        <div class="grid grid-cols-1 items-center gap-8 md:grid-cols-12">
+            <!-- Tagore Portrait -->
+            <div class="md:col-span-3 flex justify-center md:justify-start">
+                <div class="relative w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden border-2 border-white/20 shadow-2xl">
+                    <img src="{% static 'img/tagore-portrait.jpg' %}" 
+                         alt="Rabindranath Tagore Portrait" 
+                         class="w-full h-full object-cover filter grayscale contrast-125">
+                </div>
+            </div>
+
+            <!-- Quote Text -->
+            <div class="md:col-span-6 text-center md:text-left">
+                <div class="text-3xl text-white/40 font-serif leading-none mb-3">“</div>
+                <blockquote class="font-serif text-xl sm:text-2xl md:text-3xl text-white/95 leading-relaxed font-normal">
+                    You can't cross the sea merely by standing and staring at the water. You have to gather courage and jump.
+                </blockquote>
+                <cite class="mt-4 block text-xs md:text-sm font-sans tracking-widest text-white/60 uppercase not-italic">
+                    — Rabindranath Tagore
+                </cite>
+            </div>
+
+            <!-- Books & Branch Graphic -->
+            <div class="hidden md:col-span-3 md:flex justify-end items-center opacity-80">
+                <div class="border border-white/10 p-4 rounded-lg bg-white/5 backdrop-blur-sm text-center">
+                    <svg class="w-24 h-24 text-white/70 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M8 6h8M8 10h8" stroke-linecap="round"/>
+                    </svg>
+                    <span class="text-[10px] font-mono tracking-widest text-white/50 uppercase block mt-2">LITERATURE & ART</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- UPCOMING EVENTS & COMMUNITY PREVIEW -->
+{% if upcoming_events %}
+<section class="v-section bg-paper">
+    <div class="v-container">
+        <div class="flex items-center justify-between mb-8">
+            <div>
+                <p class="text-xs uppercase tracking-widest text-smoke font-mono">Join In</p>
+                <h2 class="font-serif text-3xl text-ink">Upcoming Events</h2>
+            </div>
+            <a href="{% url 'events:list' %}" class="v-btn-link text-xs">VIEW ALL EVENTS &rarr;</a>
+        </div>
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {% for event in upcoming_events %}
+                {% include "components/event_card.html" with event=event %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

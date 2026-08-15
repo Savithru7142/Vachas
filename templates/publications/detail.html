@@ -1,0 +1,26 @@
+{% extends "base/public_base.html" %}
+{% block title %}{{ publication.title }} — {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<article class="v-section">
+    <div class="v-container max-w-3xl">
+        <div class="flex flex-wrap gap-2 mb-6">
+            {% if publication.wing %}<span class="v-badge-outline">{{ publication.wing.name }}</span>{% endif %}
+            {% if publication.category %}<span class="v-badge-outline">{{ publication.category.name }}</span>{% endif %}
+        </div>
+        <h1 class="font-serif text-5xl leading-tight">{{ publication.title }}</h1>
+        <p class="mt-4 text-sm uppercase tracking-wider text-smoke">By {{ publication.author_display }}{% if publication.published_at %} · {{ publication.published_at|date:"F d, Y" }}{% endif %}</p>
+        {% if publication.cover_image %}
+        <div class="mt-8 overflow-hidden border border-line">
+            <img src="{{ publication.cover_image.url }}" alt="{{ publication.title }}" class="w-full">
+        </div>
+        {% endif %}
+        <div class="mt-12 prose prose-lg max-w-none text-charcoal leading-relaxed" style="white-space: pre-wrap;">{{ publication.content }}</div>
+        {% if publication.tag_list %}
+        <div class="mt-12 flex flex-wrap gap-2">
+            {% for tag in publication.tag_list %}<span class="v-badge-outline">{{ tag }}</span>{% endfor %}
+        </div>
+        {% endif %}
+        <a href="{% url 'publications:list' %}" class="mt-12 inline-block v-link text-sm uppercase tracking-wider">← All Publications</a>
+    </div>
+</article>
+{% endblock %}

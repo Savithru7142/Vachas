@@ -1,0 +1,33 @@
+{% extends "base/public_base.html" %}
+{% block title %}Publications — {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<section class="v-section">
+    <div class="v-container">
+        <p class="text-xs uppercase tracking-wider text-smoke">Literary works</p>
+        <h1 class="mt-2 font-serif text-5xl">Publications</h1>
+        <form method="get" class="mt-8 flex flex-wrap gap-4">
+            <select name="wing" class="v-input w-auto min-w-[160px]" onchange="this.form.submit()">
+                <option value="">All Wings</option>
+                {% for w in wings %}<option value="{{ w.slug }}" {% if current_wing == w.slug %}selected{% endif %}>{{ w.name }}</option>{% endfor %}
+            </select>
+            <select name="category" class="v-input w-auto min-w-[160px]" onchange="this.form.submit()">
+                <option value="">All Categories</option>
+                {% for c in categories %}<option value="{{ c.slug }}" {% if current_category == c.slug %}selected{% endif %}>{{ c.name }}</option>{% endfor %}
+            </select>
+        </form>
+        <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {% for publication in publications %}
+            {% include "components/publication_card.html" %}
+            {% empty %}
+            <div class="v-empty col-span-full">No published works yet.</div>
+            {% endfor %}
+        </div>
+        {% if page_obj.has_other_pages %}
+        <div class="mt-12 flex justify-center gap-4">
+            {% if page_obj.has_previous %}<a href="?page={{ page_obj.previous_page_number }}{% if current_wing %}&wing={{ current_wing }}{% endif %}{% if current_category %}&category={{ current_category }}{% endif %}" class="v-btn-secondary v-btn-sm">Previous</a>{% endif %}
+            {% if page_obj.has_next %}<a href="?page={{ page_obj.next_page_number }}{% if current_wing %}&wing={{ current_wing }}{% endif %}{% if current_category %}&category={{ current_category }}{% endif %}" class="v-btn-secondary v-btn-sm">Next</a>{% endif %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

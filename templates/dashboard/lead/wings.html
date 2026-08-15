@@ -1,0 +1,42 @@
+{% extends "dashboard/lead/base.html" %}
+{% load vachas_tags %}
+{% block page_title %}Wings{% endblock %}
+{% block content %}
+<div class="mb-6"><a href="{% url 'lead:wing_create' %}" class="v-btn">Create Wing</a></div>
+<div class="v-table-wrapper">
+    <table class="v-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Public</th>
+                <th class="text-right">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for wing in wings %}
+            <tr>
+                <td class="font-medium text-ink">
+                    <a href="{{ wing.get_absolute_url }}" class="v-link font-semibold">{{ wing.name }}</a>
+                </td>
+                <td class="text-xs">
+                    <span class="v-badge-outline">{{ wing.get_wing_type_display }}</span>
+                </td>
+                <td>
+                    {% if wing.is_public %}
+                        <span class="v-badge v-badge-active">Yes</span>
+                    {% else %}
+                        <span class="v-badge-outline">No</span>
+                    {% endif %}
+                </td>
+                <td class="text-right whitespace-nowrap">
+                    <a href="{% url 'lead:wing_edit' wing.slug %}" class="v-link text-xs">Edit</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="4" class="text-smoke text-center py-8">No wings configured.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

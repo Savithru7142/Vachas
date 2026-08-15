@@ -1,0 +1,17 @@
+{% extends "dashboard/core/base.html" %}
+{% block page_title %}Review: {{ publication.title }}{% endblock %}
+{% block content %}
+<div class="max-w-3xl">
+    <div class="v-card mb-8">
+        <p class="text-xs text-smoke uppercase">By {{ publication.author_display }}</p>
+        <div class="mt-4 whitespace-pre-wrap text-sm leading-relaxed">{{ publication.content|truncatewords:200 }}</div>
+    </div>
+    <form method="post" class="space-y-6">
+        {% csrf_token %}
+        {% for field in form %}
+        <div><label class="v-label">{{ field.label }}</label>{{ field }}</div>
+        {% endfor %}
+        <button type="submit" class="v-btn">Save Review</button>
+    </form>
+</div>
+{% endblock %}

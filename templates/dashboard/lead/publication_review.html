@@ -1,0 +1,130 @@
+{% extends "dashboard/lead/base.html" %}
+{% block page_title %}Review: {{ publication.title }}{% endblock %}
+{% block content %}
+<div class="max-w-4xl mx-auto space-y-6">
+    <!-- Top Navigation & Status -->
+    <div class="flex items-center justify-between pb-3 border-b border-line">
+        <a href="{% url 'lead:publications' %}" class="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-smoke hover:text-ink transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            Back to Submissions
+        </a>
+        <div class="flex items-center gap-2">
+            <span class="text-xs text-smoke font-medium uppercase tracking-wider">Status:</span>
+            <span class="v-badge 
+                {% if publication.status == 'PUBLISHED' %}v-badge-active
+                {% elif publication.status == 'APPROVED' %}v-badge-info
+                {% elif publication.status == 'UNDER_REVIEW' %}v-badge-pending
+                {% elif publication.status == 'REJECTED' %}v-badge-danger
+                {% else %}v-badge-pending{% endif %}">
+                {{ publication.get_status_display }}
+            </span>
+        </div>
+    </div>
+
+    <!-- Review Decision Card -->
+    <div class="v-card border-2 border-line/80 shadow-sm bg-white">
+        <div class="mb-4">
+            <h3 class="font-serif text-xl font-bold text-ink">Review Decision & Feedback</h3>
+            <p class="text-xs text-smoke mt-1">Select an action to update this submission's status or write feedback notes.</p>
+        </div>
+
+        <form method="post" class="space-y-4">
+            {% csrf_token %}
+            <div>
+                <label for="review_notes" class="v-label">Review Notes / Feedback (Optional)</label>
+                <textarea id="review_notes" name="review_notes" rows="3" class="v-input text-sm text-ink placeholder:text-smoke/60" placeholder="Add notes for the author or internal review remarks...">{{ publication.review_notes }}</textarea>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-wrap items-center gap-3 pt-2">
+                <button type="submit" name="action" value="publish" class="v-btn !bg-emerald-700 hover:!bg-emerald-800 !border-emerald-700 text-white font-semibold text-xs px-4 py-2.5 flex items-center gap-2 shadow-sm">
+                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    Accept & Publish
+                </button>
+
+                <button type="submit" name="action" value="approve" class="v-btn !bg-indigo-700 hover:!bg-indigo-800 !border-indigo-700 text-white font-semibold text-xs px-4 py-2.5 flex items-center gap-2 shadow-sm">
+                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    Approve (Ready)
+                </button>
+
+                <button type="submit" name="action" value="under_review" class="v-btn-secondary font-semibold text-xs px-4 py-2.5 flex items-center gap-2">
+                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    Mark Under Review
+                </button>
+
+                <button type="submit" name="action" value="reject" class="v-btn-danger font-semibold text-xs px-4 py-2.5 flex items-center gap-2 ml-auto" onclick="return confirm('Are you sure you want to reject this submission?')">
+                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                    Reject
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Submission Content Card -->
+    <article class="v-card bg-white shadow-sm border border-line">
+        <!-- Submission Header -->
+        <div class="border-b border-line pb-6 mb-6">
+            <h1 class="font-serif text-3xl sm:text-4xl font-bold text-ink leading-tight mb-4">{{ publication.title }}</h1>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 rounded-lg bg-paper-warm border border-line text-xs">
+                <div>
+                    <span class="block uppercase font-mono text-[10px] text-smoke font-semibold">Author</span>
+                    <span class="font-medium text-ink text-sm">{{ publication.author_display }}</span>
+                    {% if publication.pen_name and publication.pen_name != publication.author_display %}
+                    <span class="text-smoke block text-[11px] font-mono">(Pen: {{ publication.pen_name }})</span>
+                    {% endif %}
+                </div>
+                <div>
+                    <span class="block uppercase font-mono text-[10px] text-smoke font-semibold">Wing / Category</span>
+                    <span class="font-medium text-ink text-sm">{{ publication.wing.name|default:"General" }}</span>
+                    {% if publication.category %}
+                    <span class="text-smoke block text-[11px]">{{ publication.category.name }}</span>
+                    {% endif %}
+                </div>
+                <div>
+                    <span class="block uppercase font-mono text-[10px] text-smoke font-semibold">Submitted Date</span>
+                    <span class="font-medium text-ink text-sm">{{ publication.created_at|date:"M d, Y" }}</span>
+                    <span class="text-smoke block text-[11px] font-mono">{{ publication.created_at|time:"H:i" }}</span>
+                </div>
+                <div>
+                    <span class="block uppercase font-mono text-[10px] text-smoke font-semibold">Reviewed By</span>
+                    <span class="font-medium text-ink text-sm">{{ publication.reviewed_by.display_name|default:"Pending Review" }}</span>
+                    {% if publication.published_at %}
+                    <span class="text-smoke block text-[11px]">Published: {{ publication.published_at|date:"M d, Y" }}</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if publication.tags %}
+            <div class="flex flex-wrap items-center gap-2 mt-4">
+                <span class="text-xs text-smoke font-medium">Tags:</span>
+                {% for tag in publication.tag_list %}
+                <span class="px-2 py-0.5 rounded text-xs bg-paper-warm text-charcoal border border-line font-mono">{{ tag }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+        {% if publication.cover_image %}
+        <div class="mb-6 rounded-lg overflow-hidden border border-line max-h-96 bg-paper-warm">
+            <img src="{{ publication.cover_image.url }}" alt="{{ publication.title }}" class="w-full h-full object-contain mx-auto">
+        </div>
+        {% endif %}
+
+        {% if publication.excerpt %}
+        <div class="mb-6 p-4 rounded-lg bg-paper-warm border-l-4 border-amber-500">
+            <span class="block text-[10px] font-mono uppercase text-amber-800 font-bold tracking-wider mb-1">Excerpt</span>
+            <p class="text-sm text-charcoal italic leading-relaxed">{{ publication.excerpt }}</p>
+        </div>
+        {% endif %}
+
+        <!-- Full Content -->
+        <div class="pt-2">
+            <h4 class="text-xs font-mono uppercase text-smoke tracking-wider mb-3">Content</h4>
+            <div class="text-ink text-base md:text-lg leading-relaxed whitespace-pre-wrap font-serif bg-paper-warm/40 p-6 rounded-lg border border-line/60">
+{{ publication.content }}
+            </div>
+        </div>
+    </article>
+</div>
+{% endblock %}

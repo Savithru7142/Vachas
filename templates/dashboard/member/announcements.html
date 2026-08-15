@@ -1,0 +1,9 @@
+{% extends "dashboard/member/base.html" %}
+{% block page_title %}Announcements{% endblock %}
+{% block content %}
+<div class="max-w-3xl space-y-6">
+    {% for announcement in announcements %}
+    {% include "components/announcement_card.html" %}
+    {% empty %}<div class="v-empty">No announcements.</div>{% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% load vachas_tags %}
+{% extends "dashboard/core/base.html" %}
+{% block page_title %}Announcements{% endblock %}
+{% block content %}
+<div class="mb-6"><a href="{% dash_url 'announcement_create' %}" class="v-btn">New Announcement</a></div>
+<div class="space-y-4">
+    {% for a in announcements %}
+    <div class="v-card"><p class="font-medium">{{ a.title }}</p><p class="text-xs text-smoke mt-1">{{ a.get_audience_display }} · {{ a.published_at|date:"M d" }}</p></div>
+    {% empty %}<div class="v-empty">No announcements.</div>{% endfor %}
+</div>
+{% endblock %}

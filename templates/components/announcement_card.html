@@ -1,0 +1,9 @@
+<article class="{% if compact %}border-b border-line pb-4{% else %}v-card{% endif %}">
+    <time class="text-xs uppercase tracking-wider text-smoke font-mono">{{ announcement.published_at|date:"M d, Y" }}</time>
+    <h3 class="mt-1 font-serif text-lg">{{ announcement.title }}</h3>
+    {% if not compact %}
+    <div class="mt-3 text-sm leading-relaxed text-charcoal">{{ announcement.body|linebreaksbr }}</div>
+    {% else %}
+    <p class="mt-1 text-sm text-smoke line-clamp-2">{{ announcement.body|truncatewords:20 }}</p>
+    {% endif %}
+</article>

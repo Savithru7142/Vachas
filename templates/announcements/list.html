@@ -1,0 +1,16 @@
+{% extends "base/public_base.html" %}
+{% block title %}Announcements — {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<section class="v-section">
+    <div class="v-container max-w-3xl">
+        <h1 class="font-serif text-5xl">Announcements</h1>
+        <div class="mt-12 space-y-8">
+            {% for announcement in announcements %}
+            {% include "components/announcement_card.html" %}
+            {% empty %}
+            <div class="v-empty">No public announcements.</div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

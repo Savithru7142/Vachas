@@ -1,0 +1,112 @@
+{% extends "dashboard/lead/base.html" %}
+{% block page_title %}Club Lead Dashboard{% endblock %}
+{% block content %}
+<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-5 mb-8">
+    <div class="v-stat-card">
+        <p class="text-xs uppercase text-smoke">Members</p>
+        <p class="font-serif text-3xl mt-2">{{ member_count }}</p>
+    </div>
+    <a href="{% url 'lead:publications' %}?status=SUBMITTED" class="v-stat-card group hover:border-amber-500/40 transition-colors">
+        <div class="flex items-center justify-between">
+            <p class="text-xs uppercase text-smoke">Submissions Review</p>
+            {% if pending_submissions > 0 %}
+            <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-amber-500/20 text-amber-400 border border-amber-500/30">Needs Action</span>
+            {% endif %}
+        </div>
+        <p class="font-serif text-3xl mt-2 {% if pending_submissions > 0 %}text-amber-400{% endif %}">{{ pending_submissions }}</p>
+    </a>
+    <div class="v-stat-card">
+        <p class="text-xs uppercase text-smoke">Events</p>
+        <p class="font-serif text-3xl mt-2">{{ upcoming_events }}</p>
+    </div>
+    <div class="v-stat-card">
+        <p class="text-xs uppercase text-smoke">Gallery Photos</p>
+        <p class="font-serif text-3xl mt-2">{{ gallery_count }}</p>
+    </div>
+    <div class="v-stat-card">
+        <p class="text-xs uppercase text-smoke">New Messages</p>
+        <p class="font-serif text-3xl mt-2">{{ unread_contact }}</p>
+    </div>
+</div>
+
+<!-- Submissions Awaiting Review Section -->
+<div class="mb-10">
+    <div class="flex items-center justify-between mb-4">
+        <div>
+            <h2 class="font-serif text-2xl text-ink">Submissions & Publications</h2>
+            <p class="text-xs text-smoke mt-0.5">Review member submissions, approve, and publish them</p>
+        </div>
+        <a href="{% url 'lead:publications' %}" class="v-btn-sm v-btn-secondary">View All Submissions</a>
+    </div>
+
+    <div class="v-table-wrapper">
+        <table class="v-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Wing / Category</th>
+                    <th>Status</th>
+                    <th>Submitted</th>
+                    <th class="text-right">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pub in recent_submissions %}
+                <tr>
+                    <td class="font-medium text-ink">
+                        <a href="{% url 'lead:publication_review' pub.pk %}" class="hover:text-primary transition-colors">
+                            {{ pub.title }}
+                        </a>
+                    </td>
+                    <td class="text-xs text-charcoal">
+                        {{ pub.author_display }}
+                        {% if pub.pen_name and pub.pen_name != pub.author.display_name %}
+                        <span class="text-smoke">(@{{ pub.author.username }})</span>
+                        {% endif %}
+                    </td>
+                    <td class="text-xs text-smoke">
+                        {{ pub.wing.name|default:"—" }}{% if pub.category %} · {{ pub.category.name }}{% endif %}
+                    </td>
+                    <td>
+                        <span class="v-badge 
+                            {% if pub.status == 'PUBLISHED' %}v-badge-active
+                            {% elif pub.status == 'APPROVED' %}v-badge-info
+                            {% elif pub.status == 'UNDER_REVIEW' %}v-badge-pending
+                            {% elif pub.status == 'REJECTED' %}v-badge-danger
+                            {% else %}v-badge-pending{% endif %}">
+                            {{ pub.get_status_display }}
+                        </span>
+                    </td>
+                    <td class="font-mono text-xs text-smoke whitespace-nowrap">{{ pub.created_at|date:"M d, Y" }}</td>
+                    <td class="text-right space-x-2 whitespace-nowrap">
+                        <a href="{% url 'lead:publication_review' pub.pk %}" class="v-btn-sm v-btn-secondary !py-1 !px-2.5 text-xs">Review</a>
+                        {% if pub.status != 'PUBLISHED' %}
+                        <form method="post" action="{% url 'lead:publication_quick_status' pub.pk 'publish' %}" class="inline">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                            <button type="submit" class="v-btn-sm !py-1 !px-2.5 text-xs bg-emerald-700 hover:bg-emerald-600 text-white border-0">Accept & Publish</button>
+                        </form>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="text-smoke text-center py-8">
+                        No submissions yet. Member submissions will appear here for review.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Members Section -->
+<div class="flex items-center justify-between mb-6">
+    <h2 class="font-serif text-2xl text-ink">Members</h2>
+    <a href="{% url 'lead:members' %}" class="v-btn-sm v-btn-secondary">Manage Members</a>
+</div>
+{% include "components/users_table.html" with edit_url_name="lead:member_edit" approve_url_name="lead:member_approve" delete_url_name="lead:member_delete" %}
+{% endblock %}
+

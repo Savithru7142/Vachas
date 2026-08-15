@@ -1,0 +1,41 @@
+{% load vachas_tags %}
+{% extends "dashboard/core/base.html" %}
+{% block page_title %}Tasks{% endblock %}
+{% block content %}
+<div class="mb-6"><a href="{% dash_url 'task_create' %}" class="v-btn">Assign Task</a></div>
+<div class="v-table-wrapper">
+    <table class="v-table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Assigned To</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Deadline</th>
+                <th class="text-right">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                <td class="font-medium text-ink">{{ task.title }}</td>
+                <td class="text-xs text-charcoal">{% if task.assigned_to %}{{ task.assigned_to.display_name }}{% else %}<span class="text-smoke">—</span>{% endif %}</td>
+                <td><span class="v-badge-outline text-xs">{{ task.get_priority_display }}</span></td>
+                <td>
+                    <span class="v-badge 
+                        {% if task.status == 'COMPLETED' %}v-badge-active
+                        {% elif task.status == 'IN_PROGRESS' %}v-badge-info
+                        {% else %}v-badge-pending{% endif %}">
+                        {{ task.get_status_display }}
+                    </span>
+                </td>
+                <td class="text-xs font-mono text-smoke whitespace-nowrap">{% if task.deadline %}{{ task.deadline|date:"M d, Y" }}{% else %}—{% endif %}</td>
+                <td class="text-right whitespace-nowrap"><a href="{% dash_url 'task_edit' task.pk %}" class="v-link text-xs">Edit</a></td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="6" class="text-smoke text-center py-8">No tasks.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

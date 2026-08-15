@@ -1,0 +1,58 @@
+{% load static %}
+<footer class="border-t border-[#222222] bg-[#0d0d0d] text-white">
+    <div class="v-container py-16">
+        <div class="grid gap-10 md:grid-cols-4">
+            <!-- Brand Column -->
+            <div class="md:col-span-1">
+                <div class="flex items-center gap-3 mb-4">
+                    <img src="{% static 'img/logo/vachas-logo.png' %}" alt="Vachas Logo" class="h-10 w-10 rounded-full border border-white/20 object-contain">
+                    <div class="flex flex-col leading-none">
+                        <span class="font-serif text-xl font-bold tracking-tight text-white">Vachas</span>
+                        <span class="text-[8px] font-sans font-semibold tracking-[0.2em] text-[#888888] uppercase mt-1">THE LITERATURE CLUB</span>
+                    </div>
+                </div>
+                <p class="text-xs text-smoke leading-relaxed mt-4">
+                    A university literature club where words find voice across Telugu, Hindi, English, and creative expressions.
+                </p>
+            </div>
+
+            <!-- Wings Column -->
+            <div>
+                <h3 class="mb-4 text-xs font-mono uppercase tracking-widest text-[#aaaaaa]">Our Wings</h3>
+                <ul class="space-y-2 text-xs text-smoke">
+                    <li><a href="{% url 'wings:list' %}" class="hover:text-white transition-colors">Telugu Wing (కథ)</a></li>
+                    <li><a href="{% url 'wings:list' %}" class="hover:text-white transition-colors">Hindi Wing (अ)</a></li>
+                    <li><a href="{% url 'wings:list' %}" class="hover:text-white transition-colors">English Wing (A)</a></li>
+                    <li><a href="{% url 'wings:list' %}" class="hover:text-white transition-colors">Content & Editorial Team</a></li>
+                </ul>
+            </div>
+
+            <!-- Navigation Column -->
+            <div>
+                <h3 class="mb-4 text-xs font-mono uppercase tracking-widest text-[#aaaaaa]">Explore</h3>
+                <ul class="space-y-2 text-xs text-smoke">
+                    <li><a href="{% url 'publications:list' %}" class="hover:text-white transition-colors">Publications & Anthology</a></li>
+                    <li><a href="{% url 'events:list' %}" class="hover:text-white transition-colors">Events & Open Mics</a></li>
+                    <li><a href="{% url 'gallery:list' %}" class="hover:text-white transition-colors">Visual Gallery</a></li>
+                    <li><a href="{% url 'core:about' %}" class="hover:text-white transition-colors">About the Club</a></li>
+                    <li><a href="{% url 'core:team' %}" class="hover:text-white transition-colors">Executive Team</a></li>
+                </ul>
+            </div>
+
+            <!-- Connect Column -->
+            <div>
+                <h3 class="mb-4 text-xs font-mono uppercase tracking-widest text-[#aaaaaa]">Connect</h3>
+                <ul class="space-y-2 text-xs text-smoke">
+                    <li><a href="{% url 'core:contact' %}" class="hover:text-white transition-colors">Contact Us</a></li>
+                    <li><a href="{% url 'accounts:register' %}" class="hover:text-white transition-colors">Join THE VACHAS</a></li>
+                    <li><a href="{% url 'accounts:login' %}" class="hover:text-white transition-colors">Member Login</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mt-12 pt-8 border-t border-[#1f1f1f] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#777777]">
+            <p>&copy; {% now "Y" %} Vachas — The Literature Club. All rights reserved.</p>
+            <p class="font-mono text-[11px]">Where Words Find Voice.</p>
+        </div>
+    </div>
+</footer>

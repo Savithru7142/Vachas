@@ -1,0 +1,62 @@
+{% extends "base/public_base.html" %}
+{% load static %}
+{% block title %}Register — {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<section class="v-section">
+    <div class="v-container max-w-md mx-auto">
+        <div class="text-center mb-8">
+            <img src="{% static 'img/logo/vachas-logo.png' %}" alt="Vachas Logo" class="mx-auto h-16 w-16 mb-4 rounded-full shadow-sm object-contain">
+            <h1 class="font-serif text-3xl">Create account</h1>
+            <p class="mt-2 text-sm text-smoke">Choose your account type and create your profile for THE VACHAS</p>
+        </div>
+        <form method="post" class="v-card space-y-6">
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+            <div class="rounded border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+                {{ form.non_field_errors }}
+            </div>
+            {% endif %}
+            <div>
+                <label class="v-label" for="id_first_name">First name</label>
+                {{ form.first_name }}
+                {% if form.first_name.errors %}<p class="mt-1 text-sm">{{ form.first_name.errors.0 }}</p>{% endif %}
+            </div>
+            <div>
+                <label class="v-label" for="id_last_name">Last name</label>
+                {{ form.last_name }}
+                {% if form.last_name.errors %}<p class="mt-1 text-sm">{{ form.last_name.errors.0 }}</p>{% endif %}
+            </div>
+            <div>
+                <label class="v-label" for="id_display_name">Display name</label>
+                {{ form.display_name }}
+                <p class="mt-1 text-xs text-smoke">How your name appears on the site</p>
+                {% if form.display_name.errors %}<p class="mt-1 text-sm">{{ form.display_name.errors.0 }}</p>{% endif %}
+            </div>
+            <div>
+                <label class="v-label" for="id_username">Username</label>
+                {{ form.username }}
+                {% if form.username.errors %}<p class="mt-1 text-sm">{{ form.username.errors.0 }}</p>{% endif %}
+            </div>
+            <div>
+                <label class="v-label" for="id_email">Email</label>
+                {{ form.email }}
+                {% if form.email.errors %}<p class="mt-1 text-sm">{{ form.email.errors.0 }}</p>{% endif %}
+            </div>
+            <div>
+                <label class="v-label" for="id_password1">Password</label>
+                {{ form.password1 }}
+                {% if form.password1.errors %}<p class="mt-1 text-sm">{{ form.password1.errors.0 }}</p>{% endif %}
+            </div>
+            <div>
+                <label class="v-label" for="id_password2">Confirm password</label>
+                {{ form.password2 }}
+                {% if form.password2.errors %}<p class="mt-1 text-sm">{{ form.password2.errors.0 }}</p>{% endif %}
+            </div>
+            <button type="submit" class="v-btn w-full">Create Account</button>
+        </form>
+        <p class="mt-6 text-center text-sm text-smoke">
+            Already have an account? <a href="{% url 'accounts:login' %}" class="v-link">Sign in</a>
+        </p>
+    </div>
+</section>
+{% endblock %}

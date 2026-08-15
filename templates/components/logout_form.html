@@ -1,0 +1,4 @@
+<form method="post" action="{% url 'accounts:logout' %}" class="inline">
+    {% csrf_token %}
+    <button type="submit" class="{{ button_class|default:'v-nav-link bg-transparent border-0 cursor-pointer uppercase tracking-wider p-0' }}">Logout</button>
+</form>

@@ -1,0 +1,11 @@
+{% extends "dashboard/core/base.html" %}
+{% block page_title %}Profile{% endblock %}
+{% block content %}
+<form method="post" enctype="multipart/form-data" class="max-w-xl space-y-6">
+    {% csrf_token %}
+    {% for field in form %}
+    <div><label class="v-label" for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}{% if field.errors %}<p class="mt-1 text-sm">{{ field.errors.0 }}</p>{% endif %}</div>
+    {% endfor %}
+    <button type="submit" class="v-btn">Save Profile</button>
+</form>
+{% endblock %}

@@ -1,0 +1,11 @@
+{
+  "name": "the-vachas",
+  "private": true,
+  "scripts": {
+    "build:css": "tailwindcss -i ./static/src/input.css -o ./static/css/vachas.css --minify",
+    "watch:css": "tailwindcss -i ./static/src/input.css -o ./static/css/vachas.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  }
+}

@@ -1,0 +1,27 @@
+{% extends "base/public_base.html" %}
+{% block title %}{{ wing.name }} — {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<section class="v-section">
+    <div class="v-container">
+        <span class="v-badge-outline">{{ wing.get_wing_type_display }}</span>
+        <h1 class="mt-4 font-serif text-5xl">{{ wing.name }}</h1>
+        <p class="mt-6 max-w-2xl text-lg leading-relaxed text-charcoal">{{ wing.description }}</p>
+        {% if publications %}
+        <h2 class="mt-16 font-serif text-3xl">Publications</h2>
+        <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {% for publication in publications %}
+            {% include "components/publication_card.html" %}
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% if events %}
+        <h2 class="mt-16 font-serif text-3xl">Events</h2>
+        <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {% for event in events %}
+            {% include "components/event_card.html" %}
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

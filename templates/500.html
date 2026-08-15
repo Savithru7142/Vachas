@@ -1,0 +1,10 @@
+{% extends "base/public_base.html" %}
+{% block title %}Server Error — {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<section class="v-section"><div class="v-container max-w-xl text-center">
+<h1 class="font-serif text-5xl">500</h1>
+<p class="mt-4 font-serif text-2xl">Something went wrong</p>
+<p class="mt-4 text-smoke">We are working to fix this. Please try again later.</p>
+<a href="{% url 'core:home' %}" class="v-btn mt-8">Return Home</a>
+</div></section>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "dashboard/lead/base.html" %}
+{% block page_title %}{{ title }}{% endblock %}
+{% block content %}
+<form method="post" class="max-w-2xl space-y-6">
+    {% csrf_token %}
+    {% for field in form %}
+    <div><label class="v-label">{{ field.label }}</label>{{ field }}{% if field.errors %}<p class="text-sm">{{ field.errors.0 }}</p>{% endif %}</div>
+    {% endfor %}
+    <button type="submit" class="v-btn">Create Wing</button>
+</form>
+{% endblock %}

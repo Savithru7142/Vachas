@@ -1,0 +1,20 @@
+{% extends "base/public_base.html" %}
+{% block title %}Register — {{ event.title }}{% endblock %}
+{% block content %}
+<section class="v-section">
+    <div class="v-container max-w-xl">
+        <h1 class="font-serif text-3xl">Register for {{ event.title }}</h1>
+        <form method="post" class="mt-8 space-y-6">
+            {% csrf_token %}
+            {% for field in form %}
+            <div>
+                <label class="v-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}<p class="mt-1 text-sm text-ink">{{ field.errors.0 }}</p>{% endif %}
+            </div>
+            {% endfor %}
+            <button type="submit" class="v-btn">Confirm Registration</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

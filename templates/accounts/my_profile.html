@@ -1,0 +1,20 @@
+{% extends "base/public_base.html" %}
+{% block title %}My Profile — {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<section class="v-section">
+    <div class="v-container max-w-xl mx-auto">
+        <h1 class="font-serif text-3xl mb-6">My Profile</h1>
+        <form method="post" enctype="multipart/form-data" class="v-card space-y-6">
+            {% csrf_token %}
+            {% for field in form %}
+            <div>
+                <label class="v-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}<p class="mt-1 text-sm">{{ field.errors.0 }}</p>{% endif %}
+            </div>
+            {% endfor %}
+            <button type="submit" class="v-btn">Save Profile</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,7 @@
+@echo off
+REM Start THE VACHAS locally with PostgreSQL
+cd /d "%~dp0"
+call .venv\Scripts\activate.bat
+echo Starting THE VACHAS at http://127.0.0.1:8000
+python manage.py runserver
+pause

@@ -1,0 +1,47 @@
+{% extends "dashboard/lead/base.html" %}
+{% block page_title %}Announcements{% endblock %}
+{% block content %}
+<div class="mb-6 flex items-center justify-between">
+    <a href="{% url 'lead:announcement_create' %}" class="v-btn">New Announcement</a>
+</div>
+<div class="v-table-wrapper">
+    <table class="v-table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Audience</th>
+                <th>Status</th>
+                <th>Published</th>
+                <th class="text-right">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for announcement in announcements %}
+            <tr>
+                <td class="font-medium text-ink">{{ announcement.title }}</td>
+                <td class="text-xs text-charcoal">
+                    <span class="v-badge-outline">{{ announcement.get_audience_display }}</span>
+                </td>
+                <td>
+                    {% if announcement.is_published %}
+                        <span class="v-badge v-badge-active">Published</span>
+                    {% else %}
+                        <span class="v-badge v-badge-pending">Draft</span>
+                    {% endif %}
+                </td>
+                <td class="font-mono text-xs text-smoke whitespace-nowrap">{{ announcement.published_at|date:"M d, Y"|default:"—" }}</td>
+                <td class="text-right space-x-3 whitespace-nowrap">
+                    <a href="{% url 'lead:announcement_edit' announcement.pk %}" class="v-link text-xs">Edit</a>
+                    <form method="post" action="{% url 'lead:announcement_delete' announcement.pk %}" class="inline">
+                        {% csrf_token %}
+                        <button type="submit" class="v-link-danger text-xs" onclick="return confirm('Delete this announcement?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="5" class="text-smoke text-center py-8">No announcements yet.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+<article class="v-card-editorial overflow-hidden">
+    {% if event.poster %}
+    <div class="aspect-[4/3] overflow-hidden">
+        <img src="{{ event.poster.url }}" alt="{{ event.title }}" class="h-full w-full object-cover">
+    </div>
+    {% else %}
+    <div class="flex aspect-[4/3] items-center justify-center bg-ink text-white">
+        <span class="font-serif text-lg uppercase tracking-wider text-center px-4">{{ event.title|truncatewords:4 }}</span>
+    </div>
+    {% endif %}
+    <div class="p-5">
+        <time class="text-xs uppercase tracking-wider text-smoke font-mono">{{ event.date|date:"M d, Y" }}</time>
+        <h3 class="mt-2 font-serif text-lg">
+            <a href="{{ event.get_absolute_url }}" class="hover:underline">{{ event.title }}</a>
+        </h3>
+        <p class="mt-1 text-sm text-smoke">{{ event.venue }}</p>
+        <p class="mt-2 text-xs text-smoke">{{ event.registration_count }} registered</p>
+        {% if event.is_registration_open %}
+        <div class="mt-3 flex items-center justify-between">
+            <span class="v-badge">Registration Open</span>
+            <a href="{% url 'events:register' event.slug %}" class="v-btn-sm v-btn">Register</a>
+        </div>
+        {% endif %}
+    </div>
+</article>

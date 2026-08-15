@@ -1,0 +1,40 @@
+{% extends "dashboard/member/base.html" %}
+{% block page_title %}Submissions{% endblock %}
+{% block content %}
+<div class="mb-6 flex items-center justify-between">
+    <a href="{% url 'member:submission_create' %}" class="v-btn">New Submission</a>
+</div>
+<div class="v-table-wrapper">
+    <table class="v-table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Submitted</th>
+                <th class="text-right">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in submissions %}
+            <tr>
+                <td class="font-medium text-ink">{{ s.title }}</td>
+                <td>
+                    <span class="v-badge 
+                        {% if s.status == 'PUBLISHED' or s.status == 'APPROVED' %}v-badge-active
+                        {% elif s.status == 'REJECTED' %}v-badge-danger
+                        {% else %}v-badge-pending{% endif %}">
+                        {{ s.get_status_display }}
+                    </span>
+                </td>
+                <td class="text-xs font-mono text-smoke whitespace-nowrap">{{ s.created_at|date:"M d, Y" }}</td>
+                <td class="text-right whitespace-nowrap">
+                    <a href="{% url 'member:submission_detail' s.pk %}" class="v-link text-xs">View</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="4" class="text-smoke text-center py-8">No submissions yet.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

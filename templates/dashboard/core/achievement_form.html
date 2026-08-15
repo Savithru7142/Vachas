@@ -1,0 +1,12 @@
+{% extends "dashboard/core/base.html" %}
+{% load vachas_tags %}
+{% block page_title %}{{ title }}{% endblock %}
+{% block content %}
+<form method="post" enctype="multipart/form-data" class="max-w-2xl space-y-6">
+    {% csrf_token %}
+    {% for field in form %}
+    <div><label class="v-label">{{ field.label }}</label>{{ field }}</div>
+    {% endfor %}
+    <button type="submit" class="v-btn">Save</button>
+</form>
+{% endblock %}

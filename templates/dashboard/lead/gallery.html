@@ -1,0 +1,16 @@
+{% extends "dashboard/lead/base.html" %}
+{% block page_title %}Gallery{% endblock %}
+{% block content %}
+<div class="mb-6"><a href="{% url 'lead:gallery_upload' %}" class="v-btn">Upload Photo</a></div>
+<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {% for item in items %}
+    <div class="v-card overflow-hidden p-0">
+        {% if item.image %}<img src="{{ item.image.url }}" alt="{{ item.title }}" class="aspect-[4/3] w-full object-cover">{% endif %}
+        <div class="p-4 space-y-3">
+            <p class="text-sm font-medium">{{ item.title|default:"Untitled" }}</p>
+            <a href="{% url 'lead:gallery_edit' item.pk %}" class="v-btn-sm v-btn-secondary">Edit Photo</a>
+        </div>
+    </div>
+    {% empty %}<div class="v-empty col-span-full">No gallery photos yet.</div>{% endfor %}
+</div>
+{% endblock %}

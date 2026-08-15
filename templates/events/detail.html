@@ -1,0 +1,34 @@
+{% extends "base/public_base.html" %}
+{% block title %}{{ event.title }} — {{ SITE_NAME }}{% endblock %}
+{% block content %}
+<section class="v-section">
+    <div class="v-container max-w-3xl">
+        {% if event.poster %}
+        <div class="mb-8 overflow-hidden border border-line">
+            <img src="{{ event.poster.url }}" alt="{{ event.title }}" class="w-full">
+        </div>
+        {% endif %}
+        <time class="text-xs uppercase tracking-wider text-smoke font-mono">{{ event.date|date:"l, F d, Y" }}{% if event.start_time %} · {{ event.start_time|time:"g:i A" }}{% endif %}</time>
+        <h1 class="mt-2 font-serif text-5xl">{{ event.title }}</h1>
+        <p class="mt-4 text-sm text-smoke">{{ event.venue }}</p>
+        <div class="mt-8 text-lg leading-relaxed text-charcoal">{{ event.description|linebreaks }}</div>
+        {% if event.rules %}
+        <div class="mt-8 v-card">
+            <h2 class="font-serif text-xl mb-4">Rules & Guidelines</h2>
+            {{ event.rules|linebreaks }}
+        </div>
+        {% endif %}
+        <div class="mt-10">
+            {% if event.is_registration_open %}
+                {% if already_registered %}
+                <p class="v-badge">You are registered</p>
+                {% else %}
+                <a href="{% url 'events:register' event.slug %}" class="v-btn">Register for Event</a>
+                {% endif %}
+            {% else %}
+            <p class="text-sm text-smoke uppercase tracking-wider">Registration is not open</p>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

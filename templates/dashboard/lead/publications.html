@@ -1,0 +1,137 @@
+{% extends "dashboard/lead/base.html" %}
+{% block page_title %}Publications Review{% endblock %}
+{% block content %}
+<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+    <div>
+        <h2 class="font-serif text-2xl text-ink">Member Submissions & Publications</h2>
+        <p class="text-xs text-smoke mt-0.5">Review, approve, and publish literary works submitted by club members.</p>
+    </div>
+</div>
+
+<!-- Status Filter Tabs & Search Bar -->
+<div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-6 pb-4 border-b border-line">
+    <div class="flex flex-wrap items-center gap-2">
+        <a href="{% url 'lead:publications' %}"
+           class="px-3 py-1.5 rounded-md text-xs font-semibold transition-colors {% if status_filter == 'ALL' %}bg-ink text-white shadow-sm{% else %}bg-paper-warm text-charcoal hover:bg-line border border-line{% endif %}">
+            All <span class="ml-1 opacity-70">({{ count_all }})</span>
+        </a>
+        <a href="{% url 'lead:publications' %}?status=SUBMITTED"
+           class="px-3 py-1.5 rounded-md text-xs font-semibold transition-colors {% if status_filter == 'SUBMITTED' %}bg-amber-600 text-white shadow-sm{% else %}bg-paper-warm text-charcoal hover:bg-amber-100 hover:text-amber-900 border border-line{% endif %}">
+            Submitted <span class="ml-1 opacity-70">({{ count_submitted }})</span>
+        </a>
+        <a href="{% url 'lead:publications' %}?status=UNDER_REVIEW"
+           class="px-3 py-1.5 rounded-md text-xs font-semibold transition-colors {% if status_filter == 'UNDER_REVIEW' %}bg-blue-600 text-white shadow-sm{% else %}bg-paper-warm text-charcoal hover:bg-blue-100 hover:text-blue-900 border border-line{% endif %}">
+            Under Review <span class="ml-1 opacity-70">({{ count_under_review }})</span>
+        </a>
+        <a href="{% url 'lead:publications' %}?status=APPROVED"
+           class="px-3 py-1.5 rounded-md text-xs font-semibold transition-colors {% if status_filter == 'APPROVED' %}bg-indigo-600 text-white shadow-sm{% else %}bg-paper-warm text-charcoal hover:bg-indigo-100 hover:text-indigo-900 border border-line{% endif %}">
+            Approved <span class="ml-1 opacity-70">({{ count_approved }})</span>
+        </a>
+        <a href="{% url 'lead:publications' %}?status=PUBLISHED"
+           class="px-3 py-1.5 rounded-md text-xs font-semibold transition-colors {% if status_filter == 'PUBLISHED' %}bg-emerald-700 text-white shadow-sm{% else %}bg-paper-warm text-charcoal hover:bg-emerald-100 hover:text-emerald-900 border border-line{% endif %}">
+            Published <span class="ml-1 opacity-70">({{ count_published }})</span>
+        </a>
+        <a href="{% url 'lead:publications' %}?status=REJECTED"
+           class="px-3 py-1.5 rounded-md text-xs font-semibold transition-colors {% if status_filter == 'REJECTED' %}bg-red-600 text-white shadow-sm{% else %}bg-paper-warm text-charcoal hover:bg-red-100 hover:text-red-900 border border-line{% endif %}">
+            Rejected <span class="ml-1 opacity-70">({{ count_rejected }})</span>
+        </a>
+    </div>
+
+    <!-- Search Form -->
+    <form method="get" class="flex items-center gap-2">
+        {% if status_filter != 'ALL' %}
+        <input type="hidden" name="status" value="{{ status_filter }}">
+        {% endif %}
+        <input type="text" name="q" value="{{ query }}" placeholder="Search submissions..." class="v-input !py-1.5 text-xs w-64">
+        <button type="submit" class="v-btn-sm v-btn-secondary !py-1.5 text-xs">Search</button>
+        {% if query %}
+        <a href="{% url 'lead:publications' %}{% if status_filter != 'ALL' %}?status={{ status_filter }}{% endif %}" class="text-xs text-smoke hover:text-ink">Clear</a>
+        {% endif %}
+    </form>
+</div>
+
+<!-- Table of Publications -->
+<div class="v-table-wrapper">
+    <table class="v-table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Wing / Category</th>
+                <th>Status</th>
+                <th>Submitted</th>
+                <th class="text-right">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pub in publications %}
+            <tr>
+                <td class="font-medium text-ink">
+                    <a href="{% url 'lead:publication_review' pub.pk %}" class="hover:text-primary transition-colors block">
+                        {{ pub.title }}
+                    </a>
+                    {% if pub.excerpt %}
+                    <span class="text-[11px] text-smoke line-clamp-1 mt-0.5">{{ pub.excerpt|truncatechars:80 }}</span>
+                    {% endif %}
+                </td>
+                <td class="text-xs text-charcoal whitespace-nowrap">
+                    <div>{{ pub.author_display }}</div>
+                    <div class="text-[11px] text-smoke font-mono">@{{ pub.author.username }}</div>
+                </td>
+                <td class="text-xs text-smoke whitespace-nowrap">
+                    <div>{{ pub.wing.name|default:"General" }}</div>
+                    {% if pub.category %}
+                    <div class="text-[11px] text-smoke/70">{{ pub.category.name }}</div>
+                    {% endif %}
+                </td>
+                <td class="whitespace-nowrap">
+                    <span class="v-badge 
+                        {% if pub.status == 'PUBLISHED' %}v-badge-active
+                        {% elif pub.status == 'APPROVED' %}v-badge-info
+                        {% elif pub.status == 'UNDER_REVIEW' %}v-badge-pending
+                        {% elif pub.status == 'REJECTED' %}v-badge-danger
+                        {% else %}v-badge-pending{% endif %}">
+                        {{ pub.get_status_display }}
+                    </span>
+                </td>
+                <td class="font-mono text-xs text-smoke whitespace-nowrap">
+                    <div>{{ pub.created_at|date:"M d, Y" }}</div>
+                    <div class="text-[10px] text-smoke/70">{{ pub.created_at|time:"H:i" }}</div>
+                </td>
+                <td class="text-right space-x-2 whitespace-nowrap">
+                    <a href="{% url 'lead:publication_review' pub.pk %}" class="v-btn-sm v-btn-secondary !py-1 !px-2.5 text-xs">Review</a>
+
+                    {% if pub.status != 'PUBLISHED' %}
+                    <form method="post" action="{% url 'lead:publication_quick_status' pub.pk 'publish' %}" class="inline">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                        <button type="submit" class="v-btn-sm !py-1 !px-2.5 text-xs bg-emerald-700 hover:bg-emerald-800 text-white border-0" title="Publish to public site">Accept & Publish</button>
+                    </form>
+                    {% endif %}
+
+                    {% if pub.status == 'SUBMITTED' %}
+                    <form method="post" action="{% url 'lead:publication_quick_status' pub.pk 'under_review' %}" class="inline">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                        <button type="submit" class="v-btn-sm v-btn-secondary !py-1 !px-2 text-xs text-blue-700" title="Move to Under Review">Reviewing</button>
+                    </form>
+                    {% endif %}
+
+                    <form method="post" action="{% url 'lead:publication_delete' pub.pk %}" class="inline">
+                        {% csrf_token %}
+                        <button type="submit" class="v-link-danger text-xs ml-1" onclick="return confirm('Delete this publication permanently?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" class="text-smoke text-center py-12">
+                    <p class="text-base font-serif">No submissions found.</p>
+                    <p class="text-xs text-smoke mt-1">{% if query or status_filter != 'ALL' %}Try changing the filter or search query.{% else %}When members submit their articles, poems, or stories, they will appear here.{% endif %}</p>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

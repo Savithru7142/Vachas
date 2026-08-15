@@ -1,0 +1,14 @@
+{% load vachas_tags %}
+{% extends "dashboard/core/base.html" %}
+{% block page_title %}Achievements{% endblock %}
+{% block content %}
+<div class="mb-6"><a href="{% dash_url 'achievement_create' %}" class="v-btn">Add Achievement</a></div>
+<div class="space-y-4">
+    {% for a in achievements %}
+    <div class="v-card flex gap-4">
+        {% if a.image %}<img src="{{ a.image.url }}" alt="" class="h-20 w-20 object-cover border border-line">{% endif %}
+        <div><p class="font-serif text-lg">{{ a.title }}</p>{% if a.year %}<p class="text-xs text-smoke">{{ a.year }}</p>{% endif %}<p class="text-sm text-charcoal mt-1">{{ a.description|truncatewords:30 }}</p></div>
+    </div>
+    {% empty %}<div class="v-empty">No achievements yet.</div>{% endfor %}
+</div>
+{% endblock %}

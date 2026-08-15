@@ -1,0 +1,23 @@
+<article class="v-card-editorial overflow-hidden">
+    {% if publication.cover_image %}
+    <div class="aspect-[4/3] overflow-hidden">
+        <img src="{{ publication.cover_image.url }}" alt="{{ publication.title }}" class="h-full w-full object-cover">
+    </div>
+    {% else %}
+    <div class="flex aspect-[4/3] items-center justify-center bg-paper-warm">
+        <span class="font-serif text-4xl text-line">§</span>
+    </div>
+    {% endif %}
+    <div class="p-6">
+        <div class="flex flex-wrap gap-2 mb-3">
+            {% if publication.wing %}<span class="v-badge-outline">{{ publication.wing.name }}</span>{% endif %}
+            {% if publication.category %}<span class="v-badge-outline">{{ publication.category.name }}</span>{% endif %}
+        </div>
+        <h3 class="font-serif text-xl leading-tight">
+            <a href="{{ publication.get_absolute_url }}" class="hover:underline">{{ publication.title }}</a>
+        </h3>
+        <p class="mt-2 text-xs uppercase tracking-wider text-smoke">{{ publication.author_display }}</p>
+        <p class="mt-4 text-sm leading-relaxed text-charcoal line-clamp-3">{{ publication.excerpt }}</p>
+        <a href="{{ publication.get_absolute_url }}" class="mt-4 inline-block text-xs uppercase tracking-wider v-link">Read More</a>
+    </div>
+</article>

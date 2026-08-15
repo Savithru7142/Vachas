@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>{% block title %}Dashboard — {{ SITE_NAME }}{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/vachas.css' %}">
+    <link rel="icon" href="{% static 'img/logo/vachas-logo.png' %}" type="image/png">
+    <link rel="apple-touch-icon" href="{% static 'img/logo/apple-touch-icon.png' %}">
+</head>
+<body class="min-h-screen bg-paper antialiased">
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        {% block sidebar %}{% endblock %}
+
+        <!-- Main Content Area -->
+        <div class="flex flex-1 flex-col overflow-hidden min-w-0">
+            <!-- Dashboard Header -->
+            <header class="sticky top-0 z-30 flex items-center justify-between border-b border-line bg-white/90 backdrop-blur-md px-6 py-4">
+                <div class="flex items-center gap-3">
+                    <button id="dashboard-menu-toggle" class="lg:hidden p-2 text-ink rounded hover:bg-paper-warm" aria-label="Open sidebar">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                    <div>
+                        <h1 class="font-serif text-xl sm:text-2xl text-ink leading-tight">
+                            Welcome back, {{ request.user.display_name|default:request.user.username }}
+                        </h1>
+                        <p class="text-xs text-smoke font-sans">
+                            {% if request.user.is_lead %}Lead{% else %}Member{% endif %}
+                            {% if request.user.profile.wing %} • {{ request.user.profile.wing.name }} Wing{% endif %}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <a href="{% url 'core:home' %}" class="hidden sm:inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-charcoal hover:text-ink">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                        Public Site
+                    </a>
+                    <a href="{% url 'accounts:profile' %}" class="h-9 w-9 rounded-full bg-ink text-white flex items-center justify-center font-serif text-sm font-bold">
+                        {{ request.user.display_name|default:request.user.username|slice:":1"|upper }}
+                    </a>
+                </div>
+            </header>
+
+            <!-- Main Body -->
+            <main class="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 bg-paper">
+                {% if messages %}
+                <div class="mb-6 space-y-2">
+                    {% for message in messages %}
+                    <div class="v-alert {% if message.tags == 'error' %}v-alert-error{% else %}v-alert-success{% endif %}">
+                        <span>{{ message }}</span>
+                        <button type="button" class="text-sm font-bold px-2" data-dismiss="alert">×</button>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                {% block content %}{% endblock %}
+            </main>
+        </div>
+    </div>
+
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
