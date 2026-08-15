@@ -135,95 +135,98 @@
                 </div>
             </div>
 
-            <!-- Right: Featured Publications -->
-            <div class="lg:col-span-6">
-                <div class="flex items-center justify-between mb-8">
-                    <h2 class="font-serif text-2xl md:text-3xl text-ink">Featured Publications</h2>
-                    <a href="{% url 'publications:list' %}" class="v-btn-link text-xs">
-                        VIEW ALL &rarr;
-                    </a>
-                </div>
-
-                <div class="border border-line bg-white rounded-lg p-6 sm:p-8 shadow-sm">
+                    <!-- Right: Featured Publications -->
                     {% if featured_publications %}
-                        {% with pub=featured_publications.0 %}
-                        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-                            <div class="md:col-span-5 aspect-[4/5] bg-ink rounded overflow-hidden flex items-center justify-center text-white relative">
-                                {% if pub.cover_image %}
-                                <img src="{{ pub.cover_image.url }}" alt="{{ pub.title }}" class="w-full h-full object-cover">
-                                {% else %}
-                                <div class="p-6 text-center">
-                                    <span class="font-serif text-4xl block mb-2 text-white/80">§</span>
-                                    <span class="font-serif text-lg tracking-wide uppercase">{{ pub.title|truncatewords:4 }}</span>
-                                </div>
-                                {% endif %}
-                            </div>
-                            <div class="md:col-span-7 flex flex-col justify-between">
-                                <div>
-                                    <h3 class="font-serif text-2xl md:text-3xl text-ink leading-tight">
-                                        {{ pub.title }}
-                                    </h3>
-                                    <p class="mt-1 text-xs text-smoke uppercase tracking-wider">
-                                        By {{ pub.author_display }}
-                                    </p>
-                                    <div class="mt-3 flex flex-wrap gap-2">
-                                        {% if pub.category %}<span class="v-badge-outline">{{ pub.category.name }}</span>{% endif %}
-                                        {% if pub.wing %}<span class="v-badge-outline">{{ pub.wing.name }}</span>{% endif %}
-                                    </div>
-                                    <p class="mt-4 text-xs sm:text-sm text-smoke leading-relaxed line-clamp-3">
-                                        {{ pub.excerpt }}
-                                    </p>
-                                </div>
-                                <div class="mt-6">
-                                    <a href="{{ pub.get_absolute_url }}" class="v-btn-link">
-                                        READ MORE &rarr;
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        {% endwith %}
-                    {% else %}
-                        <!-- Default Featured Piece matching the design mockup -->
-                        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-                            <div class="md:col-span-5 aspect-[4/5] bg-[#111111] rounded overflow-hidden flex flex-col items-center justify-center text-white p-6 text-center relative shadow-inner">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40 opacity-80"></div>
-                                <div class="relative z-10">
-                                    <div class="font-serif text-3xl mb-2 text-white/90">📖</div>
-                                    <p class="font-serif text-sm italic tracking-widest text-smoke">The Silence Between Us</p>
-                                </div>
-                            </div>
-                            <div class="md:col-span-7 flex flex-col justify-between">
-                                <div>
-                                    <h3 class="font-serif text-2xl md:text-3xl text-ink leading-tight">
-                                        The Silence Between Us
-                                    </h3>
-                                    <p class="mt-1 text-xs text-smoke uppercase tracking-wider">
-                                        By Ananya S.
-                                    </p>
-                                    <div class="mt-3 flex flex-wrap gap-2">
-                                        <span class="v-badge-outline">POEM</span>
-                                        <span class="v-badge-outline">ENGLISH</span>
-                                    </div>
-                                    <p class="mt-4 text-xs sm:text-sm text-smoke leading-relaxed italic">
-                                        "Sometimes, silence speaks the loudest. Sometimes, it breaks everything."
-                                    </p>
-                                </div>
-                                <div class="mt-6">
-                                    <a href="{% url 'publications:list' %}" class="v-btn-link">
-                                        READ MORE &rarr;
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    {% endif %}
+                    <div class="lg:col-span-6">
+                        <div class="flex items-center justify-between mb-8">
+                            <h2 class="font-serif text-2xl md:text-3xl text-ink">
+                                Featured Publications
+                            </h2>
 
-                    <!-- Carousel Dots -->
-                    <div class="mt-6 flex items-center justify-center gap-2">
-                        <span class="h-2 w-2 rounded-full bg-ink"></span>
-                        <span class="h-2 w-2 rounded-full bg-line"></span>
-                        <span class="h-2 w-2 rounded-full bg-line"></span>
-                        <span class="h-2 w-2 rounded-full bg-line"></span>
+                            <a href="{% url 'publications:list' %}" class="v-btn-link text-xs">
+                                VIEW ALL &rarr;
+                            </a>
+                        </div>
+
+                        <div class="border border-line bg-white rounded-lg p-6 sm:p-8 shadow-sm">
+                            {% with pub=featured_publications.0 %}
+
+                            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+
+                                <!-- Publication Cover -->
+                                <div class="md:col-span-5 aspect-[4/5] bg-ink rounded overflow-hidden flex items-center justify-center text-white relative">
+
+                                    {% if pub.cover_image %}
+                                        <img
+                                            src="{{ pub.cover_image.url }}"
+                                            alt="{{ pub.title }}"
+                                            class="w-full h-full object-cover"
+                                        >
+                                    {% else %}
+                                        <div class="p-6 text-center">
+                                            <span class="font-serif text-4xl block mb-2 text-white/80">
+                                                §
+                                            </span>
+
+                                            <span class="font-serif text-lg tracking-wide uppercase">
+                                                {{ pub.title|truncatewords:4 }}
+                                            </span>
+                                        </div>
+                                    {% endif %}
+
+                                </div>
+
+                                <!-- Publication Details -->
+                                <div class="md:col-span-7 flex flex-col justify-between">
+
+                                    <div>
+
+                                        <h3 class="font-serif text-2xl md:text-3xl text-ink leading-tight">
+                                            {{ pub.title }}
+                                        </h3>
+
+                                        <p class="mt-1 text-xs text-smoke uppercase tracking-wider">
+                                            By {{ pub.author_display }}
+                                        </p>
+
+                                        <div class="mt-3 flex flex-wrap gap-2">
+
+                                            {% if pub.category %}
+                                            <span class="v-badge-outline">
+                                                {{ pub.category.name }}
+                                            </span>
+                                            {% endif %}
+
+                                            {% if pub.wing %}
+                                            <span class="v-badge-outline">
+                                                {{ pub.wing.name }}
+                                            </span>
+                                            {% endif %}
+
+                                        </div>
+
+                                        {% if pub.excerpt %}
+                                        <p class="mt-4 text-xs sm:text-sm text-smoke leading-relaxed line-clamp-3">
+                                            {{ pub.excerpt }}
+                                        </p>
+                                        {% endif %}
+
+                                    </div>
+
+                                    <div class="mt-6">
+                                        <a href="{{ pub.get_absolute_url }}" class="v-btn-link">
+                                            READ MORE &rarr;
+                                        </a>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            {% endwith %}
+                        </div>
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
