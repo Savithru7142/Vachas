@@ -5,6 +5,7 @@ from django.views.static import serve
 
 from apps.core.health import health_check
 
+
 urlpatterns = [
     path('health/', health_check, name='health'),
     path('admin/', admin.site.urls),
@@ -21,10 +22,14 @@ urlpatterns = [
     path('developer/', include('apps.developer.urls')),
 ]
 
-if settings.DEBUG:
-    urlpatterns += [
-        re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
-    ]
+# Serve uploaded media files
+urlpatterns += [
+    re_path(
+        r'^media/(?P<path>.*)$',
+        serve,
+        {'document_root': settings.MEDIA_ROOT},
+    ),
+]
 
 admin.site.site_header = 'THE VACHAS Administration'
 admin.site.site_title = 'THE VACHAS Admin'
