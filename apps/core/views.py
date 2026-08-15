@@ -15,7 +15,9 @@ def home(request):
         )[:3],
         'gallery_items': GalleryItem.objects.filter(is_public=True)[:6],
         'wings': Wing.objects.all()[:4],
-        'featured_publications': Publication.objects.published()[:2],
+        'featured_publications': Publication.objects.published().order_by(
+            '-published_at', '-created_at'
+        )[:1],
     })
 
 
