@@ -5,470 +5,1233 @@
 {% block meta_description %}Vachas is more than a club. It's a stage for ideas, emotions, and expressions that shape us.{% endblock %}
 
 {% block content %}
+
+<!-- ========================================================= -->
 <!-- HERO SECTION -->
+<!-- ========================================================= -->
+
 <section class="relative overflow-hidden border-b border-line bg-paper pt-8 pb-16 md:pt-16 md:pb-24">
     <div class="v-container">
         <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
+
             <!-- Hero Left Content -->
             <div class="lg:col-span-6 z-10">
                 <div class="max-w-xl">
+
                     <h1 class="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight text-ink">
                         Where<br>
                         Words<br>
                         Find Voice.
                     </h1>
+
                     <p class="mt-6 text-sm sm:text-base text-smoke max-w-md leading-relaxed font-sans">
                         Vachas is more than a club. It's a stage for ideas, emotions, and expressions that shape us.
                     </p>
+
                     <div class="mt-8 flex flex-wrap items-center gap-6">
-                        <a href="#wings" class="v-btn-explore">EXPLORE</a>
-                        <a href="{% url 'publications:list' %}" class="v-btn-link group">
-                            OUR PUBLICATIONS 
-                            <span class="inline-block transition-transform duration-200 group-hover:translate-x-1">&rarr;</span>
+
+                        <a href="#wings" class="v-btn-explore">
+                            EXPLORE
                         </a>
+
+                        <a href="{% url 'publications:list' %}" class="v-btn-link group">
+                            OUR PUBLICATIONS
+                            <span class="inline-block transition-transform duration-200 group-hover:translate-x-1">
+                                &rarr;
+                            </span>
+                        </a>
+
                     </div>
+
                 </div>
             </div>
 
-            <!-- Hero Center/Right Artwork -->
+
+            <!-- Hero Artwork -->
             <div class="lg:col-span-5 relative flex items-center justify-center">
+
                 <div class="relative w-full max-w-lg overflow-hidden rounded-lg border border-line/60 bg-white/40 p-2 shadow-sm backdrop-blur-sm">
-                    <img src="{% static 'img/hero-quill-hand.jpg' %}" 
-                         alt="Hand writing with quill and ink with flying letters turning into birds" 
-                         class="w-full h-auto object-cover rounded filter contrast-[1.02]">
+
+                    <img
+                        src="{% static 'img/hero-quill-hand.jpg' %}"
+                        alt="Hand writing with quill and ink with flying letters turning into birds"
+                        class="w-full h-auto object-cover rounded filter contrast-[1.02]"
+                    >
+
                 </div>
+
             </div>
 
-            <!-- Hero Far Right Badge & Scroll Widget -->
+
+            <!-- Hero Far Right Badge -->
             <div class="hidden lg:col-span-1 lg:flex flex-col items-center justify-between h-full min-h-[380px] py-2 border-l border-line/40 pl-4">
+
                 <div class="writing-vertical text-[11px] font-mono tracking-[0.25em] text-smoke/80 uppercase select-none">
                     THE VACHAS LITERATURE CLUB
                 </div>
-                <a href="#wings" class="group flex flex-col items-center gap-1.5 border border-line bg-white px-2.5 py-3 rounded text-[10px] font-mono tracking-widest text-ink hover:border-ink hover:bg-ink hover:text-white transition-all shadow-sm">
-                    <svg class="h-4 w-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+
+                <a
+                    href="#wings"
+                    class="group flex flex-col items-center gap-1.5 border border-line bg-white px-2.5 py-3 rounded text-[10px] font-mono tracking-widest text-ink hover:border-ink hover:bg-ink hover:text-white transition-all shadow-sm"
+                >
+
+                    <svg
+                        class="h-4 w-4 animate-bounce"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                        />
                     </svg>
-                    <span class="text-center leading-tight">SCROLL<br>DOWN</span>
+
+                    <span class="text-center leading-tight">
+                        SCROLL<br>DOWN
+                    </span>
+
                 </a>
+
             </div>
+
         </div>
     </div>
 </section>
-<!-- LITERATURE CLUB GALLERY -->
-{% if gallery_items %}
-<section class="v-section bg-paper border-b border-line">
-    <div class="v-container">
 
-        <!-- Gallery Heading -->
-        <div class="flex items-end justify-between mb-8">
+
+<!-- ========================================================= -->
+<!-- VACHAS FULL-WIDTH GALLERY -->
+<!-- ========================================================= -->
+
+{% if gallery_items %}
+
+<section
+    class="relative bg-black border-b border-line overflow-hidden"
+    aria-label="Vachas Gallery"
+>
+
+    <!-- Gallery Heading -->
+    <div class="v-container relative z-20 pt-12 pb-6">
+
+        <div class="flex items-end justify-between">
+
             <div>
-                <p class="text-xs uppercase tracking-widest text-smoke font-mono">
+
+                <p class="text-xs uppercase tracking-[0.25em] text-smoke font-mono">
                     Moments & Expressions
                 </p>
-                <h2 class="font-serif text-3xl md:text-4xl text-ink">
-                    Life at Vachas
+
+                <h2 class="mt-2 font-serif text-3xl md:text-4xl text-ink">
+                    Vachas in Action
                 </h2>
+
             </div>
 
-            <div class="hidden sm:block text-xs text-smoke font-mono">
-                LITERATURE • ART • COMMUNITY
-            </div>
+            <a
+                href="{% url 'gallery:list' %}"
+                class="hidden sm:inline-flex text-xs uppercase tracking-widest text-smoke hover:text-ink transition"
+            >
+                Explore Gallery
+                <span class="ml-2">&rarr;</span>
+            </a>
+
         </div>
 
-        <!-- Slideshow -->
-        <div class="relative overflow-hidden rounded-xl border border-line bg-white shadow-sm">
+    </div>
 
-            <div id="vachas-gallery" class="relative">
 
-                {% for item in gallery_items %}
-                <div class="gallery-slide {% if forloop.first %}block{% else %}hidden{% endif %}">
+    <!-- ===================================================== -->
+    <!-- FULL WIDTH SLIDESHOW -->
+    <!-- ===================================================== -->
 
-                    {% if item.image %}
-                    <img
-                        src="{{ item.image.url }}"
-                        alt="{{ item.title|default:'Vachas Literature Club' }}"
-                        class="w-full h-[280px] sm:h-[380px] md:h-[480px] object-cover"
-                    >
+    <div
+        id="vachas-gallery"
+        class="relative w-full h-[58vh] min-h-[420px] md:h-[72vh] md:min-h-[560px] overflow-hidden group"
+        tabindex="0"
+        aria-roledescription="carousel"
+        aria-label="Vachas Literature Club gallery"
+    >
+
+        {% for item in gallery_items %}
+
+        <div
+            class="
+                gallery-slide
+                absolute inset-0
+                transition-all duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)]
+                {% if forloop.first %}
+                    opacity-100 scale-100 z-10
+                {% else %}
+                    opacity-0 scale-[1.06] z-0 pointer-events-none
+                {% endif %}
+            "
+            data-slide="{{ forloop.counter0 }}"
+            role="group"
+            aria-roledescription="slide"
+            aria-label="Slide {{ forloop.counter }} of {{ gallery_items|length }}"
+            {% if not forloop.first %}aria-hidden="true"{% endif %}
+        >
+
+            {% if item.image %}
+
+            <img
+                src="{{ item.image.url }}"
+                alt="{{ item.title|default:'Vachas Literature Club' }}"
+                class="
+                    absolute inset-0
+                    w-full h-full
+                    object-cover
+                    transition-transform duration-[7000ms] ease-out
+                    {% if forloop.first %}
+                        scale-100
+                    {% else %}
+                        scale-105
                     {% endif %}
+                "
+            >
+
+            {% endif %}
+
+
+            <!-- Dark cinematic overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/10"></div>
+
+
+            <!-- Side vignette -->
+            <div class="absolute inset-0 bg-gradient-to-r from-black/35 via-transparent to-black/20"></div>
+
+
+            <!-- Slide Content -->
+            <div class="absolute inset-x-0 bottom-0 z-10">
+
+                <div class="v-container pb-12 md:pb-16">
 
                     {% if item.title %}
-                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 sm:p-8">
-                        <h3 class="font-serif text-xl sm:text-2xl text-white">
+
+                    <div class="max-w-2xl">
+
+                        <div class="mb-3 flex items-center gap-3">
+
+                            <span class="block w-8 h-px bg-white/80"></span>
+
+                            <span class="text-[10px] uppercase tracking-[0.3em] text-white/70 font-mono">
+                                Vachas in Action
+                            </span>
+
+                        </div>
+
+                        <h3 class="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white leading-tight">
                             {{ item.title }}
                         </h3>
 
                         {% if item.caption %}
-                        <p class="mt-1 text-sm text-white/75">
+
+                        <p class="mt-3 max-w-xl text-sm md:text-base text-white/75 leading-relaxed">
                             {{ item.caption }}
                         </p>
+
                         {% endif %}
+
                     </div>
+
                     {% endif %}
 
                 </div>
-                {% endfor %}
 
             </div>
 
-            <!-- Previous Button -->
-            {% if gallery_items|length > 1 %}
-            <button
-                type="button"
-                id="gallery-prev"
-                class="absolute left-4 top-1/2 -translate-y-1/2
-                       w-10 h-10 rounded-full
-                       bg-black/50 text-white
-                       hover:bg-black/75 transition
-                       flex items-center justify-center"
-                aria-label="Previous image"
-            >
-                &larr;
-            </button>
-
-            <!-- Next Button -->
-            <button
-                type="button"
-                id="gallery-next"
-                class="absolute right-4 top-1/2 -translate-y-1/2
-                       w-10 h-10 rounded-full
-                       bg-black/50 text-white
-                       hover:bg-black/75 transition
-                       flex items-center justify-center"
-                aria-label="Next image"
-            >
-                &rarr;
-            </button>
-            {% endif %}
-
         </div>
 
-        <!-- Slide Dots -->
+        {% endfor %}
+
+
+        <!-- ================================================= -->
+        <!-- PREVIOUS BUTTON -->
+        <!-- ================================================= -->
+
         {% if gallery_items|length > 1 %}
-        <div class="flex justify-center gap-2 mt-5" id="gallery-dots">
+
+        <button
+            type="button"
+            id="gallery-prev"
+            class="
+                absolute left-5 md:left-8 top-1/2 -translate-y-1/2 z-30
+                w-12 h-12 md:w-14 md:h-14
+                rounded-full
+                border border-white/30
+                bg-black/30
+                backdrop-blur-md
+                text-white
+                flex items-center justify-center
+                opacity-70 md:opacity-0
+                group-hover:opacity-100
+                hover:bg-white hover:text-black
+                hover:border-white
+                hover:scale-110
+                transition-all duration-300
+            "
+            aria-label="Previous image"
+        >
+
+            <svg
+                class="w-5 h-5 md:w-6 md:h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M15 19l-7-7 7-7"
+                />
+            </svg>
+
+        </button>
+
+
+        <!-- ================================================= -->
+        <!-- NEXT BUTTON -->
+        <!-- ================================================= -->
+
+        <button
+            type="button"
+            id="gallery-next"
+            class="
+                absolute right-5 md:right-8 top-1/2 -translate-y-1/2 z-30
+                w-12 h-12 md:w-14 md:h-14
+                rounded-full
+                border border-white/30
+                bg-black/30
+                backdrop-blur-md
+                text-white
+                flex items-center justify-center
+                opacity-70 md:opacity-0
+                group-hover:opacity-100
+                hover:bg-white hover:text-black
+                hover:border-white
+                hover:scale-110
+                transition-all duration-300
+            "
+            aria-label="Next image"
+        >
+
+            <svg
+                class="w-5 h-5 md:w-6 md:h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M9 5l7 7-7 7"
+                />
+            </svg>
+
+        </button>
+
+
+        <!-- ================================================= -->
+        <!-- SLIDE INDICATORS -->
+        <!-- ================================================= -->
+
+        <div
+            id="gallery-dots"
+            class="
+                absolute bottom-6 left-1/2
+                -translate-x-1/2
+                z-30
+                flex items-center gap-2
+                px-4 py-2
+                rounded-full
+                bg-black/30
+                backdrop-blur-md
+                border border-white/10
+            "
+        >
+
             {% for item in gallery_items %}
+
             <button
                 type="button"
-                class="gallery-dot h-2 w-2 rounded-full transition-all
-                       {% if forloop.first %}bg-ink{% else %}bg-line{% endif %}"
+                class="
+                    gallery-dot
+                    h-1.5
+                    rounded-full
+                    transition-all duration-500
+                    {% if forloop.first %}
+                        w-8 bg-white
+                    {% else %}
+                        w-2 bg-white/40
+                    {% endif %}
+                "
                 data-slide="{{ forloop.counter0 }}"
                 aria-label="Go to slide {{ forloop.counter }}"
             ></button>
+
             {% endfor %}
+
         </div>
+
         {% endif %}
 
     </div>
+
 </section>
 
-<!-- Gallery JavaScript -->
+
+<!-- ========================================================= -->
+<!-- GALLERY JAVASCRIPT -->
+<!-- ========================================================= -->
+
 <script>
+
 document.addEventListener('DOMContentLoaded', function () {
 
-    const slides = document.querySelectorAll('.gallery-slide');
-    const dots = document.querySelectorAll('.gallery-dot');
+    const gallery = document.getElementById('vachas-gallery');
+
+    if (!gallery) {
+        return;
+    }
+
+
+    const slides = gallery.querySelectorAll('.gallery-slide');
+    const dots = gallery.querySelectorAll('.gallery-dot');
+
     const prevButton = document.getElementById('gallery-prev');
     const nextButton = document.getElementById('gallery-next');
+
 
     if (slides.length <= 1) {
         return;
     }
 
+
     let currentSlide = 0;
-    let autoSlide;
+    let autoSlide = null;
+
+    const AUTO_SLIDE_TIME = 6000;
+
+
+    /* ===================================================== */
+    /* SHOW SLIDE */
+    /* ===================================================== */
 
     function showSlide(index) {
 
-        currentSlide = (index + slides.length) % slides.length;
+        currentSlide =
+            (index + slides.length) % slides.length;
+
 
         slides.forEach((slide, i) => {
-            slide.classList.toggle('hidden', i !== currentSlide);
-            slide.classList.toggle('block', i === currentSlide);
+
+            const image = slide.querySelector('img');
+
+            if (i === currentSlide) {
+
+                slide.classList.remove(
+                    'opacity-0',
+                    'scale-[1.06]',
+                    'z-0',
+                    'pointer-events-none'
+                );
+
+                slide.classList.add(
+                    'opacity-100',
+                    'scale-100',
+                    'z-10'
+                );
+
+                slide.setAttribute('aria-hidden', 'false');
+
+
+                if (image) {
+
+                    image.classList.remove('scale-105');
+                    image.classList.add('scale-100');
+
+                }
+
+            } else {
+
+                slide.classList.remove(
+                    'opacity-100',
+                    'scale-100',
+                    'z-10'
+                );
+
+                slide.classList.add(
+                    'opacity-0',
+                    'scale-[1.06]',
+                    'z-0',
+                    'pointer-events-none'
+                );
+
+                slide.setAttribute('aria-hidden', 'true');
+
+
+                if (image) {
+
+                    image.classList.remove('scale-100');
+                    image.classList.add('scale-105');
+
+                }
+
+            }
+
         });
+
+
+        /* ================================================= */
+        /* UPDATE DOTS */
+        /* ================================================= */
 
         dots.forEach((dot, i) => {
-            dot.classList.toggle('bg-ink', i === currentSlide);
-            dot.classList.toggle('bg-line', i !== currentSlide);
+
+            if (i === currentSlide) {
+
+                dot.classList.remove(
+                    'w-2',
+                    'bg-white/40'
+                );
+
+                dot.classList.add(
+                    'w-8',
+                    'bg-white'
+                );
+
+            } else {
+
+                dot.classList.remove(
+                    'w-8',
+                    'bg-white'
+                );
+
+                dot.classList.add(
+                    'w-2',
+                    'bg-white/40'
+                );
+
+            }
+
         });
+
     }
+
+
+    /* ===================================================== */
+    /* NEXT */
+    /* ===================================================== */
 
     function nextSlide() {
+
         showSlide(currentSlide + 1);
+
     }
+
+
+    /* ===================================================== */
+    /* PREVIOUS */
+    /* ===================================================== */
 
     function previousSlide() {
+
         showSlide(currentSlide - 1);
+
     }
+
+
+    /* ===================================================== */
+    /* START AUTO SLIDE */
+    /* ===================================================== */
 
     function startAutoSlide() {
-        autoSlide = setInterval(nextSlide, 5000);
+
+        stopAutoSlide();
+
+        autoSlide = setInterval(
+            nextSlide,
+            AUTO_SLIDE_TIME
+        );
+
     }
+
+
+    /* ===================================================== */
+    /* STOP AUTO SLIDE */
+    /* ===================================================== */
+
+    function stopAutoSlide() {
+
+        if (autoSlide) {
+
+            clearInterval(autoSlide);
+
+            autoSlide = null;
+
+        }
+
+    }
+
+
+    /* ===================================================== */
+    /* RESET AUTO SLIDE */
+    /* ===================================================== */
 
     function resetAutoSlide() {
-        clearInterval(autoSlide);
+
         startAutoSlide();
+
     }
+
+
+    /* ===================================================== */
+    /* BUTTON EVENTS */
+    /* ===================================================== */
 
     if (nextButton) {
+
         nextButton.addEventListener('click', function () {
+
             nextSlide();
+
             resetAutoSlide();
+
         });
+
     }
+
 
     if (prevButton) {
+
         prevButton.addEventListener('click', function () {
+
             previousSlide();
+
             resetAutoSlide();
+
         });
+
     }
 
+
+    /* ===================================================== */
+    /* DOT EVENTS */
+    /* ===================================================== */
+
     dots.forEach((dot, index) => {
+
         dot.addEventListener('click', function () {
+
             showSlide(index);
+
             resetAutoSlide();
+
         });
+
     });
 
+
+    /* ===================================================== */
+    /* PAUSE WHEN HOVERING */
+    /* ===================================================== */
+
+    gallery.addEventListener('mouseenter', function () {
+
+        stopAutoSlide();
+
+    });
+
+
+    gallery.addEventListener('mouseleave', function () {
+
+        startAutoSlide();
+
+    });
+
+
+    /* ===================================================== */
+    /* KEYBOARD CONTROLS */
+    /* ===================================================== */
+
+    gallery.addEventListener('keydown', function (event) {
+
+        if (event.key === 'ArrowRight') {
+
+            nextSlide();
+
+            resetAutoSlide();
+
+        }
+
+        if (event.key === 'ArrowLeft') {
+
+            previousSlide();
+
+            resetAutoSlide();
+
+        }
+
+    });
+
+
+    /* ===================================================== */
+    /* TOUCH / SWIPE SUPPORT */
+    /* ===================================================== */
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+
+    gallery.addEventListener(
+        'touchstart',
+        function (event) {
+
+            touchStartX =
+                event.changedTouches[0].screenX;
+
+        },
+        { passive: true }
+    );
+
+
+    gallery.addEventListener(
+        'touchend',
+        function (event) {
+
+            touchEndX =
+                event.changedTouches[0].screenX;
+
+
+            const swipeDistance =
+                touchEndX - touchStartX;
+
+
+            if (Math.abs(swipeDistance) < 50) {
+                return;
+            }
+
+
+            if (swipeDistance < 0) {
+
+                nextSlide();
+
+            } else {
+
+                previousSlide();
+
+            }
+
+
+            resetAutoSlide();
+
+        },
+        { passive: true }
+    );
+
+
+    /* ===================================================== */
+    /* INITIALIZE */
+    /* ===================================================== */
+
     showSlide(0);
+
     startAutoSlide();
+
 });
+
 </script>
+
 {% endif %}
 
-<!-- WINGS & FEATURED PUBLICATIONS SECTION -->
+
+
+<!-- ========================================================= -->
+<!-- WINGS & FEATURED PUBLICATIONS -->
+<!-- ========================================================= -->
+
 <section id="wings" class="v-section bg-paper">
+
     <div class="v-container">
+
         <div class="grid grid-cols-1 gap-12 lg:grid-cols-12">
-            <!-- Left: Explore Our Wings -->
+
+            <!-- ================================================= -->
+            <!-- EXPLORE OUR WINGS -->
+            <!-- ================================================= -->
+
             <div class="lg:col-span-6">
+
                 <div class="flex items-center justify-between mb-8">
+
                     <h2 class="font-serif text-2xl md:text-3xl text-ink flex items-center gap-2">
-                        Explore Our Wings <span class="text-xl">🖋️</span>
+                        Explore Our Wings
+                        <span class="text-xl">🖋️</span>
                     </h2>
+
                 </div>
-                
+
+
                 <div class="grid grid-cols-2 gap-4 sm:gap-6">
+
                     <!-- Telugu Wing -->
-                    <a href="{% url 'wings:list' %}" class="v-wing-card rounded-lg">
+
+                    <a
+                        href="{% url 'wings:list' %}"
+                        class="v-wing-card rounded-lg"
+                    >
+
                         <div>
-                            <div class="font-serif text-3xl md:text-4xl text-ink font-semibold mb-2">కథ</div>
-                            <h3 class="text-xs font-bold uppercase tracking-wider text-ink">Telugu Wing</h3>
+
+                            <div class="font-serif text-3xl md:text-4xl text-ink font-semibold mb-2">
+                                కథ
+                            </div>
+
+                            <h3 class="text-xs font-bold uppercase tracking-wider text-ink">
+                                Telugu Wing
+                            </h3>
+
                             <div class="w-6 h-[1px] bg-line my-3"></div>
+
                             <p class="text-xs text-smoke leading-relaxed">
                                 Celebrating Telugu language and literature.
                             </p>
+
                         </div>
+
+
                         <div class="mt-6 flex justify-end">
-                            <span class="text-sm font-medium text-ink transition-transform duration-200 group-hover:translate-x-1">&rarr;</span>
+
+                            <span class="text-sm font-medium text-ink transition-transform duration-200 group-hover:translate-x-1">
+                                &rarr;
+                            </span>
+
                         </div>
+
                     </a>
 
+
                     <!-- Hindi Wing -->
-                    <a href="{% url 'wings:list' %}" class="v-wing-card rounded-lg">
+
+                    <a
+                        href="{% url 'wings:list' %}"
+                        class="v-wing-card rounded-lg"
+                    >
+
                         <div>
-                            <div class="font-serif text-3xl md:text-4xl text-ink font-semibold mb-2">अ</div>
-                            <h3 class="text-xs font-bold uppercase tracking-wider text-ink">Hindi Wing</h3>
+
+                            <div class="font-serif text-3xl md:text-4xl text-ink font-semibold mb-2">
+                                अ
+                            </div>
+
+                            <h3 class="text-xs font-bold uppercase tracking-wider text-ink">
+                                Hindi Wing
+                            </h3>
+
                             <div class="w-6 h-[1px] bg-line my-3"></div>
+
                             <p class="text-xs text-smoke leading-relaxed">
                                 Expressions in Hindi, echoes of our roots.
                             </p>
+
                         </div>
+
+
                         <div class="mt-6 flex justify-end">
-                            <span class="text-sm font-medium text-ink transition-transform duration-200 group-hover:translate-x-1">&rarr;</span>
+
+                            <span class="text-sm font-medium text-ink transition-transform duration-200 group-hover:translate-x-1">
+                                &rarr;
+                            </span>
+
                         </div>
+
                     </a>
 
+
                     <!-- English Wing -->
-                    <a href="{% url 'wings:list' %}" class="v-wing-card rounded-lg">
+
+                    <a
+                        href="{% url 'wings:list' %}"
+                        class="v-wing-card rounded-lg"
+                    >
+
                         <div>
-                            <div class="font-serif text-3xl md:text-4xl text-ink font-semibold mb-2">A</div>
-                            <h3 class="text-xs font-bold uppercase tracking-wider text-ink">English Wing</h3>
+
+                            <div class="font-serif text-3xl md:text-4xl text-ink font-semibold mb-2">
+                                A
+                            </div>
+
+                            <h3 class="text-xs font-bold uppercase tracking-wider text-ink">
+                                English Wing
+                            </h3>
+
                             <div class="w-6 h-[1px] bg-line my-3"></div>
+
                             <p class="text-xs text-smoke leading-relaxed">
                                 Ideas that inspire, words that connect.
                             </p>
+
                         </div>
+
+
                         <div class="mt-6 flex justify-end">
-                            <span class="text-sm font-medium text-ink transition-transform duration-200 group-hover:translate-x-1">&rarr;</span>
+
+                            <span class="text-sm font-medium text-ink transition-transform duration-200 group-hover:translate-x-1">
+                                &rarr;
+                            </span>
+
                         </div>
+
                     </a>
 
+
                     <!-- Content Team -->
-                    <a href="{% url 'wings:list' %}" class="v-wing-card rounded-lg">
+
+                    <a
+                        href="{% url 'wings:list' %}"
+                        class="v-wing-card rounded-lg"
+                    >
+
                         <div>
+
                             <div class="text-3xl md:text-4xl text-ink font-semibold mb-2">
-                                <svg class="w-8 h-8 md:w-9 md:h-9" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2l2.5 7.5H22l-6 4.5 2.5 7.5-6.5-5-6.5 5 2.5-7.5-6-4.5h7.5z" opacity="0.1"/>
-                                    <path d="M3 21l3.75-1.25L18.5 8 16 5.5 4.25 17.25 3 21z M17.75 3.75c.39-.39 1.02-.39 1.41 0l1.09 1.09c.39.39.39 1.02 0 1.41l-1.34 1.34-2.5-2.5 1.34-1.34z"/>
+
+                                <svg
+                                    class="w-8 h-8 md:w-9 md:h-9"
+                                    fill="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+
+                                    <path
+                                        d="M12 2l2.5 7.5H22l-6 4.5 2.5 7.5-6.5-5-6.5 5 2.5-7.5-6-4.5h7.5z"
+                                        opacity="0.1"
+                                    />
+
+                                    <path
+                                        d="M3 21l3.75-1.25L18.5 8 16 5.5 4.25 17.25 3 21z M17.75 3.75c.39-.39 1.02-.39 1.41 0l1.09 1.09c.39.39.39 1.02 0 1.41l-1.34 1.34-2.5-2.5 1.34-1.34z"
+                                    />
+
                                 </svg>
+
                             </div>
-                            <h3 class="text-xs font-bold uppercase tracking-wider text-ink">Content Team</h3>
+
+
+                            <h3 class="text-xs font-bold uppercase tracking-wider text-ink">
+                                Content Team
+                            </h3>
+
                             <div class="w-6 h-[1px] bg-line my-3"></div>
+
                             <p class="text-xs text-smoke leading-relaxed">
                                 Crafting thoughts, curating voices.
                             </p>
+
                         </div>
+
+
                         <div class="mt-6 flex justify-end">
-                            <span class="text-sm font-medium text-ink transition-transform duration-200 group-hover:translate-x-1">&rarr;</span>
+
+                            <span class="text-sm font-medium text-ink transition-transform duration-200 group-hover:translate-x-1">
+                                &rarr;
+                            </span>
+
                         </div>
+
                     </a>
+
                 </div>
+
             </div>
 
-                    <!-- Right: Featured Publications -->
-                    {% if featured_publications %}
-                    <div class="lg:col-span-6">
-                        <div class="flex items-center justify-between mb-8">
-                            <h2 class="font-serif text-2xl md:text-3xl text-ink">
-                                Featured Publications
-                            </h2>
 
-                            <a href="{% url 'publications:list' %}" class="v-btn-link text-xs">
-                                VIEW ALL &rarr;
-                            </a>
+            <!-- ================================================= -->
+            <!-- FEATURED PUBLICATIONS -->
+            <!-- ================================================= -->
+
+            {% if featured_publications %}
+
+            <div class="lg:col-span-6">
+
+                <div class="flex items-center justify-between mb-8">
+
+                    <h2 class="font-serif text-2xl md:text-3xl text-ink">
+                        Featured Publications
+                    </h2>
+
+                    <a
+                        href="{% url 'publications:list' %}"
+                        class="v-btn-link text-xs"
+                    >
+                        VIEW ALL &rarr;
+                    </a>
+
+                </div>
+
+
+                <div class="border border-line bg-white rounded-lg p-6 sm:p-8 shadow-sm">
+
+                    {% with pub=featured_publications.0 %}
+
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+
+                        <!-- Publication Cover -->
+
+                        <div class="md:col-span-5 aspect-[4/5] bg-ink rounded overflow-hidden flex items-center justify-center text-white relative">
+
+                            {% if pub.cover_image %}
+
+                            <img
+                                src="{{ pub.cover_image.url }}"
+                                alt="{{ pub.title }}"
+                                class="w-full h-full object-cover"
+                            >
+
+                            {% else %}
+
+                            <div class="p-6 text-center">
+
+                                <span class="font-serif text-4xl block mb-2 text-white/80">
+                                    §
+                                </span>
+
+                                <span class="font-serif text-lg tracking-wide uppercase">
+                                    {{ pub.title|truncatewords:4 }}
+                                </span>
+
+                            </div>
+
+                            {% endif %}
+
                         </div>
 
-                        <div class="border border-line bg-white rounded-lg p-6 sm:p-8 shadow-sm">
-                            {% with pub=featured_publications.0 %}
 
-                            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                        <!-- Publication Details -->
 
-                                <!-- Publication Cover -->
-                                <div class="md:col-span-5 aspect-[4/5] bg-ink rounded overflow-hidden flex items-center justify-center text-white relative">
+                        <div class="md:col-span-7 flex flex-col justify-between">
 
-                                    {% if pub.cover_image %}
-                                        <img
-                                            src="{{ pub.cover_image.url }}"
-                                            alt="{{ pub.title }}"
-                                            class="w-full h-full object-cover"
-                                        >
-                                    {% else %}
-                                        <div class="p-6 text-center">
-                                            <span class="font-serif text-4xl block mb-2 text-white/80">
-                                                §
-                                            </span>
+                            <div>
 
-                                            <span class="font-serif text-lg tracking-wide uppercase">
-                                                {{ pub.title|truncatewords:4 }}
-                                            </span>
-                                        </div>
+                                <h3 class="font-serif text-2xl md:text-3xl text-ink leading-tight">
+                                    {{ pub.title }}
+                                </h3>
+
+                                <p class="mt-1 text-xs text-smoke uppercase tracking-wider">
+                                    By {{ pub.author_display }}
+                                </p>
+
+
+                                <div class="mt-3 flex flex-wrap gap-2">
+
+                                    {% if pub.category %}
+
+                                    <span class="v-badge-outline">
+                                        {{ pub.category.name }}
+                                    </span>
+
+                                    {% endif %}
+
+
+                                    {% if pub.wing %}
+
+                                    <span class="v-badge-outline">
+                                        {{ pub.wing.name }}
+                                    </span>
+
                                     {% endif %}
 
                                 </div>
 
-                                <!-- Publication Details -->
-                                <div class="md:col-span-7 flex flex-col justify-between">
 
-                                    <div>
+                                {% if pub.excerpt %}
 
-                                        <h3 class="font-serif text-2xl md:text-3xl text-ink leading-tight">
-                                            {{ pub.title }}
-                                        </h3>
+                                <p class="mt-4 text-xs sm:text-sm text-smoke leading-relaxed line-clamp-3">
+                                    {{ pub.excerpt }}
+                                </p>
 
-                                        <p class="mt-1 text-xs text-smoke uppercase tracking-wider">
-                                            By {{ pub.author_display }}
-                                        </p>
-
-                                        <div class="mt-3 flex flex-wrap gap-2">
-
-                                            {% if pub.category %}
-                                            <span class="v-badge-outline">
-                                                {{ pub.category.name }}
-                                            </span>
-                                            {% endif %}
-
-                                            {% if pub.wing %}
-                                            <span class="v-badge-outline">
-                                                {{ pub.wing.name }}
-                                            </span>
-                                            {% endif %}
-
-                                        </div>
-
-                                        {% if pub.excerpt %}
-                                        <p class="mt-4 text-xs sm:text-sm text-smoke leading-relaxed line-clamp-3">
-                                            {{ pub.excerpt }}
-                                        </p>
-                                        {% endif %}
-
-                                    </div>
-
-                                    <div class="mt-6">
-                                        <a href="{{ pub.get_absolute_url }}" class="v-btn-link">
-                                            READ MORE &rarr;
-                                        </a>
-                                    </div>
-
-                                </div>
+                                {% endif %}
 
                             </div>
 
-                            {% endwith %}
+
+                            <div class="mt-6">
+
+                                <a
+                                    href="{{ pub.get_absolute_url }}"
+                                    class="v-btn-link"
+                                >
+                                    READ MORE &rarr;
+                                </a>
+
+                            </div>
+
                         </div>
+
                     </div>
-                    {% endif %}
+
+                    {% endwith %}
+
                 </div>
+
             </div>
+
+            {% endif %}
+
         </div>
+
     </div>
+
 </section>
 
-<!-- RABINDRANATH TAGORE QUOTE BANNER -->
+
+
+<!-- ========================================================= -->
+<!-- RABINDRANATH TAGORE QUOTE -->
+<!-- ========================================================= -->
+
 <section class="border-y border-line bg-[#0a0a0a] text-white py-14 md:py-20 relative overflow-hidden">
+
     <div class="v-container relative z-10">
+
         <div class="grid grid-cols-1 items-center gap-8 md:grid-cols-12">
+
             <!-- Tagore Portrait -->
+
             <div class="md:col-span-3 flex justify-center md:justify-start">
+
                 <div class="relative w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden border-2 border-white/20 shadow-2xl">
-                    <img src="{% static 'img/tagore-portrait.jpg' %}" 
-                         alt="Rabindranath Tagore Portrait" 
-                         class="w-full h-full object-cover filter grayscale contrast-125">
+
+                    <img
+                        src="{% static 'img/tagore-portrait.jpg' %}"
+                        alt="Rabindranath Tagore Portrait"
+                        class="w-full h-full object-cover filter grayscale contrast-125"
+                    >
+
                 </div>
+
             </div>
 
-            <!-- Quote Text -->
+
+            <!-- Quote -->
+
             <div class="md:col-span-6 text-center md:text-left">
-                <div class="text-3xl text-white/40 font-serif leading-none mb-3">“</div>
+
+                <div class="text-3xl text-white/40 font-serif leading-none mb-3">
+                    “
+                </div>
+
                 <blockquote class="font-serif text-xl sm:text-2xl md:text-3xl text-white/95 leading-relaxed font-normal">
                     You can't cross the sea merely by standing and staring at the water. You have to gather courage and jump.
                 </blockquote>
+
                 <cite class="mt-4 block text-xs md:text-sm font-sans tracking-widest text-white/60 uppercase not-italic">
                     — Rabindranath Tagore
                 </cite>
+
             </div>
 
-            <!-- Books & Branch Graphic -->
+
+            <!-- Literature Graphic -->
+
             <div class="hidden md:col-span-3 md:flex justify-end items-center opacity-80">
+
                 <div class="border border-white/10 p-4 rounded-lg bg-white/5 backdrop-blur-sm text-center">
-                    <svg class="w-24 h-24 text-white/70 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M8 6h8M8 10h8" stroke-linecap="round"/>
+
+                    <svg
+                        class="w-24 h-24 text-white/70 mx-auto"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1"
+                    >
+
+                        <path
+                            d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+
+                        <path
+                            d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+
+                        <path
+                            d="M8 6h8M8 10h8"
+                            stroke-linecap="round"
+                        />
+
                     </svg>
-                    <span class="text-[10px] font-mono tracking-widest text-white/50 uppercase block mt-2">LITERATURE & ART</span>
+
+                    <span class="text-[10px] font-mono tracking-widest text-white/50 uppercase block mt-2">
+                        LITERATURE & ART
+                    </span>
+
                 </div>
+
             </div>
+
         </div>
+
     </div>
+
 </section>
 
-<!-- UPCOMING EVENTS & COMMUNITY PREVIEW -->
+
+
+<!-- ========================================================= -->
+<!-- UPCOMING EVENTS -->
+<!-- ========================================================= -->
+
 {% if upcoming_events %}
+
 <section class="v-section bg-paper">
+
     <div class="v-container">
+
         <div class="flex items-center justify-between mb-8">
+
             <div>
-                <p class="text-xs uppercase tracking-widest text-smoke font-mono">Join In</p>
-                <h2 class="font-serif text-3xl text-ink">Upcoming Events</h2>
+
+                <p class="text-xs uppercase tracking-widest text-smoke font-mono">
+                    Join In
+                </p>
+
+                <h2 class="font-serif text-3xl text-ink">
+                    Upcoming Events
+                </h2>
+
             </div>
-            <a href="{% url 'events:list' %}" class="v-btn-link text-xs">VIEW ALL EVENTS &rarr;</a>
+
+            <a
+                href="{% url 'events:list' %}"
+                class="v-btn-link text-xs"
+            >
+                VIEW ALL EVENTS &rarr;
+            </a>
+
         </div>
+
+
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+
             {% for event in upcoming_events %}
+
                 {% include "components/event_card.html" with event=event %}
+
             {% endfor %}
+
         </div>
+
     </div>
+
 </section>
+
 {% endif %}
+
 {% endblock %}

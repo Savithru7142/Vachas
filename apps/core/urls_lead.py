@@ -38,9 +38,10 @@ urlpatterns = [
     path('events/<int:pk>/edit/', LeadEventEditView.as_view(), name='event_edit'),
     path('events/<int:pk>/delete/', views.lead_event_delete, name='event_delete'),
     path('events/<int:pk>/registrations/', LeadEventRegistrationsView.as_view(), name='event_registrations'),
-    path('gallery/', views.LeadGalleryView.as_view(), name='gallery'),
-    path('gallery/upload/', views.LeadGalleryUploadView.as_view(), name='gallery_upload'),
+    path('gallery/', views.LeadGalleryView.as_view(), name='gallery'), 
+    path('gallery/upload/', views.LeadGalleryUploadView.as_view(), name='gallery_upload'), 
     path('gallery/<int:pk>/edit/', views.lead_gallery_edit, name='gallery_edit'),
+    path('gallery/<int:pk>/delete/', views.lead_gallery_delete, name='gallery_delete'),
     path('contact/', views.LeadContactMessagesView.as_view(), name='contact'),
     path('profile/', ProfileView.as_view(), name='profile'),
 ]
