@@ -2,7 +2,8 @@
 {% load static %}
 
 {% block title %}Vachas — The Literature Club | Where Words Find Voice{% endblock %}
-{% block meta_description %}Vachas is more than a club. It's a stage for ideas, emotions, and expressions that shape us.{% endblock %}
+{% block meta_description %}Vachas is more than a club. It's a stage for ideas, emotions, and expressions that shape
+us.{% endblock %}
 
 {% block content %}
 
@@ -18,7 +19,8 @@
             <div class="lg:col-span-6 z-10">
                 <div class="max-w-xl">
 
-                    <h1 class="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight text-ink">
+                    <h1
+                        class="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight text-ink">
                         Where<br>
                         Words<br>
                         Find Voice.
@@ -50,13 +52,12 @@
             <!-- Hero Artwork -->
             <div class="lg:col-span-5 relative flex items-center justify-center">
 
-                <div class="relative w-full max-w-lg overflow-hidden rounded-lg border border-line/60 bg-white/40 p-2 shadow-sm backdrop-blur-sm">
+                <div
+                    class="relative w-full max-w-lg overflow-hidden rounded-lg border border-line/60 bg-white/40 p-2 shadow-sm backdrop-blur-sm">
 
-                    <img
-                        src="{% static 'img/hero-quill-hand.jpg' %}"
+                    <img src="{% static 'img/hero-quill-hand.jpg' %}"
                         alt="Hand writing with quill and ink with flying letters turning into birds"
-                        class="w-full h-auto object-cover rounded filter contrast-[1.02]"
-                    >
+                        class="w-full h-auto object-cover rounded filter contrast-[1.02]">
 
                 </div>
 
@@ -64,29 +65,20 @@
 
 
             <!-- Hero Far Right Badge -->
-            <div class="hidden lg:col-span-1 lg:flex flex-col items-center justify-between h-full min-h-[380px] py-2 border-l border-line/40 pl-4">
+            <div
+                class="hidden lg:col-span-1 lg:flex flex-col items-center justify-between h-full min-h-[380px] py-2 border-l border-line/40 pl-4">
 
-                <div class="writing-vertical text-[11px] font-mono tracking-[0.25em] text-smoke/80 uppercase select-none">
+                <div
+                    class="writing-vertical text-[11px] font-mono tracking-[0.25em] text-smoke/80 uppercase select-none">
                     THE VACHAS LITERATURE CLUB
                 </div>
 
-                <a
-                    href="#wings"
-                    class="group flex flex-col items-center gap-1.5 border border-line bg-white px-2.5 py-3 rounded text-[10px] font-mono tracking-widest text-ink hover:border-ink hover:bg-ink hover:text-white transition-all shadow-sm"
-                >
+                <a href="#wings"
+                    class="group flex flex-col items-center gap-1.5 border border-line bg-white px-2.5 py-3 rounded text-[10px] font-mono tracking-widest text-ink hover:border-ink hover:bg-ink hover:text-white transition-all shadow-sm">
 
-                    <svg
-                        class="h-4 w-4 animate-bounce"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                        />
+                    <svg class="h-4 w-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                     </svg>
 
                     <span class="text-center leading-tight">
@@ -108,10 +100,7 @@
 
 {% if gallery_items %}
 
-<section
-    class="relative bg-black border-b border-line overflow-hidden"
-    aria-label="Vachas Gallery"
->
+<section class="relative bg-black border-b border-line overflow-hidden" aria-label="Vachas Gallery">
 
     <!-- Gallery Heading -->
     <div class="v-container relative z-20 pt-12 pb-6">
@@ -130,10 +119,8 @@
 
             </div>
 
-            <a
-                href="{% url 'gallery:list' %}"
-                class="hidden sm:inline-flex text-xs uppercase tracking-widest text-smoke hover:text-ink transition"
-            >
+            <a href="{% url 'gallery:list' %}"
+                class="hidden sm:inline-flex text-xs uppercase tracking-widest text-smoke hover:text-ink transition">
                 Explore Gallery
                 <span class="ml-2">&rarr;</span>
             </a>
@@ -147,19 +134,12 @@
     <!-- FULL WIDTH SLIDESHOW -->
     <!-- ===================================================== -->
 
-    <div
-        id="vachas-gallery"
-        class="relative w-full overflow-hidden group"
-        style="height: 58vh; min-height: 420px;"
-        tabindex="0"
-        aria-roledescription="carousel"
-        aria-label="Vachas Literature Club gallery"
-    >
+    <div id="vachas-gallery" class="relative w-full overflow-hidden group" style="height: 58vh; min-height: 500px;"
+        tabindex="0" aria-roledescription="carousel" aria-label="Vachas Literature Club gallery">
 
         {% for item in gallery_items %}
 
-        <div
-            class="
+        <div class="
                 gallery-slide
                 absolute inset-0
                 transition-all duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)]
@@ -168,31 +148,23 @@
                 {% else %}
                     opacity-0 scale-[1.06] z-0 pointer-events-none
                 {% endif %}
-            "
-            data-slide="{{ forloop.counter0 }}"
-            role="group"
-            aria-roledescription="slide"
-            aria-label="Slide {{ forloop.counter }} of {{ gallery_items|length }}"
-            {% if not forloop.first %}aria-hidden="true"{% endif %}
-        >
+            " data-slide="{{ forloop.counter0 }}" role="group" aria-roledescription="slide"
+            aria-label="Slide {{ forloop.counter }} of {{ gallery_items|length }}" {% if not forloop.first
+            %}aria-hidden="true" {% endif %}>
 
             {% if item.image %}
 
-            <img
-                src="{{ item.image.url }}"
-                alt="{{ item.title|default:'Vachas Literature Club' }}"
-                class="
+            <img src="{{ item.image.url }}" alt="{{ item.title|default:'Vachas Literature Club' }}" class="
                     absolute inset-0
                     w-full h-full
                     object-fill
-                    transition-transform duration-[7000ms] ease-out
+                    transition-transform duration-[3000ms] ease-out
                     {% if forloop.first %}
                         scale-100
                     {% else %}
                         scale-105
                     {% endif %}
-                "
-            >
+                ">
 
             {% endif %}
 
@@ -255,10 +227,7 @@
 
         {% if gallery_items|length > 1 %}
 
-        <button
-            type="button"
-            id="gallery-prev"
-            class="
+        <button type="button" id="gallery-prev" class="
                 absolute left-5 md:left-8 top-1/2 -translate-y-1/2 z-30
                 w-12 h-12 md:w-14 md:h-14
                 rounded-full
@@ -267,28 +236,16 @@
                 backdrop-blur-md
                 text-white
                 flex items-center justify-center
-                opacity-70 md:opacity-0
+                opacity-80 md:opacity-0
                 group-hover:opacity-100
                 hover:bg-white hover:text-black
                 hover:border-white
                 hover:scale-110
                 transition-all duration-300
-            "
-            aria-label="Previous image"
-        >
+            " aria-label="Previous image">
 
-            <svg
-                class="w-5 h-5 md:w-6 md:h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-            >
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
-                    d="M15 19l-7-7 7-7"
-                />
+            <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7" />
             </svg>
 
         </button>
@@ -298,10 +255,7 @@
         <!-- NEXT BUTTON -->
         <!-- ================================================= -->
 
-        <button
-            type="button"
-            id="gallery-next"
-            class="
+        <button type="button" id="gallery-next" class="
                 absolute right-5 md:right-8 top-1/2 -translate-y-1/2 z-30
                 w-12 h-12 md:w-14 md:h-14
                 rounded-full
@@ -310,28 +264,16 @@
                 backdrop-blur-md
                 text-white
                 flex items-center justify-center
-                opacity-70 md:opacity-0
+                opacity-80 md:opacity-0
                 group-hover:opacity-100
                 hover:bg-white hover:text-black
                 hover:border-white
                 hover:scale-110
                 transition-all duration-300
-            "
-            aria-label="Next image"
-        >
+            " aria-label="Next image">
 
-            <svg
-                class="w-5 h-5 md:w-6 md:h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-            >
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
-                    d="M9 5l7 7-7 7"
-                />
+            <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7" />
             </svg>
 
         </button>
@@ -341,9 +283,7 @@
         <!-- SLIDE INDICATORS -->
         <!-- ================================================= -->
 
-        <div
-            id="gallery-dots"
-            class="
+        <div id="gallery-dots" class="
                 absolute bottom-6 left-1/2
                 -translate-x-1/2
                 z-30
@@ -353,14 +293,11 @@
                 bg-black/30
                 backdrop-blur-md
                 border border-white/10
-            "
-        >
+            ">
 
             {% for item in gallery_items %}
 
-            <button
-                type="button"
-                class="
+            <button type="button" class="
                     gallery-dot
                     h-1.5
                     rounded-full
@@ -370,10 +307,7 @@
                     {% else %}
                         w-2 bg-white/40
                     {% endif %}
-                "
-                data-slide="{{ forloop.counter0 }}"
-                aria-label="Go to slide {{ forloop.counter }}"
-            ></button>
+                " data-slide="{{ forloop.counter0 }}" aria-label="Go to slide {{ forloop.counter }}"></button>
 
             {% endfor %}
 
@@ -392,359 +326,359 @@
 
 <script>
 
-document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function () {
 
-    const gallery = document.getElementById('vachas-gallery');
+        const gallery = document.getElementById('vachas-gallery');
 
-    if (!gallery) {
-        return;
-    }
-
-
-    const slides = gallery.querySelectorAll('.gallery-slide');
-    const dots = gallery.querySelectorAll('.gallery-dot');
-
-    const prevButton = document.getElementById('gallery-prev');
-    const nextButton = document.getElementById('gallery-next');
+        if (!gallery) {
+            return;
+        }
 
 
-    if (slides.length <= 1) {
-        return;
-    }
+        const slides = gallery.querySelectorAll('.gallery-slide');
+        const dots = gallery.querySelectorAll('.gallery-dot');
+
+        const prevButton = document.getElementById('gallery-prev');
+        const nextButton = document.getElementById('gallery-next');
 
 
-    let currentSlide = 0;
-    let autoSlide = null;
-
-    const AUTO_SLIDE_TIME = 6000;
-
-
-    /* ===================================================== */
-    /* SHOW SLIDE */
-    /* ===================================================== */
-
-    function showSlide(index) {
-
-        currentSlide =
-            (index + slides.length) % slides.length;
+        if (slides.length <= 1) {
+            return;
+        }
 
 
-        slides.forEach((slide, i) => {
+        let currentSlide = 0;
+        let autoSlide = null;
 
-            const image = slide.querySelector('img');
-
-            if (i === currentSlide) {
-
-                slide.classList.remove(
-                    'opacity-0',
-                    'scale-[1.06]',
-                    'z-0',
-                    'pointer-events-none'
-                );
-
-                slide.classList.add(
-                    'opacity-100',
-                    'scale-100',
-                    'z-10'
-                );
-
-                slide.setAttribute('aria-hidden', 'false');
+        const AUTO_SLIDE_TIME = 6000;
 
 
-                if (image) {
+        /* ===================================================== */
+        /* SHOW SLIDE */
+        /* ===================================================== */
 
-                    image.classList.remove('scale-105');
-                    image.classList.add('scale-100');
+        function showSlide(index) {
+
+            currentSlide =
+                (index + slides.length) % slides.length;
+
+
+            slides.forEach((slide, i) => {
+
+                const image = slide.querySelector('img');
+
+                if (i === currentSlide) {
+
+                    slide.classList.remove(
+                        'opacity-0',
+                        'scale-[1.06]',
+                        'z-0',
+                        'pointer-events-none'
+                    );
+
+                    slide.classList.add(
+                        'opacity-100',
+                        'scale-100',
+                        'z-10'
+                    );
+
+                    slide.setAttribute('aria-hidden', 'false');
+
+
+                    if (image) {
+
+                        image.classList.remove('scale-105');
+                        image.classList.add('scale-100');
+
+                    }
+
+                } else {
+
+                    slide.classList.remove(
+                        'opacity-100',
+                        'scale-100',
+                        'z-10'
+                    );
+
+                    slide.classList.add(
+                        'opacity-0',
+                        'scale-[1.06]',
+                        'z-0',
+                        'pointer-events-none'
+                    );
+
+                    slide.setAttribute('aria-hidden', 'true');
+
+
+                    if (image) {
+
+                        image.classList.remove('scale-100');
+                        image.classList.add('scale-105');
+
+                    }
 
                 }
 
-            } else {
-
-                slide.classList.remove(
-                    'opacity-100',
-                    'scale-100',
-                    'z-10'
-                );
-
-                slide.classList.add(
-                    'opacity-0',
-                    'scale-[1.06]',
-                    'z-0',
-                    'pointer-events-none'
-                );
-
-                slide.setAttribute('aria-hidden', 'true');
+            });
 
 
-                if (image) {
+            /* ================================================= */
+            /* UPDATE DOTS */
+            /* ================================================= */
 
-                    image.classList.remove('scale-100');
-                    image.classList.add('scale-105');
+            dots.forEach((dot, i) => {
+
+                if (i === currentSlide) {
+
+                    dot.classList.remove(
+                        'w-2',
+                        'bg-white/40'
+                    );
+
+                    dot.classList.add(
+                        'w-8',
+                        'bg-white'
+                    );
+
+                } else {
+
+                    dot.classList.remove(
+                        'w-8',
+                        'bg-white'
+                    );
+
+                    dot.classList.add(
+                        'w-2',
+                        'bg-white/40'
+                    );
 
                 }
 
-            }
-
-        });
-
-
-        /* ================================================= */
-        /* UPDATE DOTS */
-        /* ================================================= */
-
-        dots.forEach((dot, i) => {
-
-            if (i === currentSlide) {
-
-                dot.classList.remove(
-                    'w-2',
-                    'bg-white/40'
-                );
-
-                dot.classList.add(
-                    'w-8',
-                    'bg-white'
-                );
-
-            } else {
-
-                dot.classList.remove(
-                    'w-8',
-                    'bg-white'
-                );
-
-                dot.classList.add(
-                    'w-2',
-                    'bg-white/40'
-                );
-
-            }
-
-        });
-
-    }
-
-
-    /* ===================================================== */
-    /* NEXT */
-    /* ===================================================== */
-
-    function nextSlide() {
-
-        showSlide(currentSlide + 1);
-
-    }
-
-
-    /* ===================================================== */
-    /* PREVIOUS */
-    /* ===================================================== */
-
-    function previousSlide() {
-
-        showSlide(currentSlide - 1);
-
-    }
-
-
-    /* ===================================================== */
-    /* START AUTO SLIDE */
-    /* ===================================================== */
-
-    function startAutoSlide() {
-
-        stopAutoSlide();
-
-        autoSlide = setInterval(
-            nextSlide,
-            AUTO_SLIDE_TIME
-        );
-
-    }
-
-
-    /* ===================================================== */
-    /* STOP AUTO SLIDE */
-    /* ===================================================== */
-
-    function stopAutoSlide() {
-
-        if (autoSlide) {
-
-            clearInterval(autoSlide);
-
-            autoSlide = null;
+            });
 
         }
 
-    }
 
+        /* ===================================================== */
+        /* NEXT */
+        /* ===================================================== */
 
-    /* ===================================================== */
-    /* RESET AUTO SLIDE */
-    /* ===================================================== */
+        function nextSlide() {
 
-    function resetAutoSlide() {
-
-        startAutoSlide();
-
-    }
-
-
-    /* ===================================================== */
-    /* BUTTON EVENTS */
-    /* ===================================================== */
-
-    if (nextButton) {
-
-        nextButton.addEventListener('click', function () {
-
-            nextSlide();
-
-            resetAutoSlide();
-
-        });
-
-    }
-
-
-    if (prevButton) {
-
-        prevButton.addEventListener('click', function () {
-
-            previousSlide();
-
-            resetAutoSlide();
-
-        });
-
-    }
-
-
-    /* ===================================================== */
-    /* DOT EVENTS */
-    /* ===================================================== */
-
-    dots.forEach((dot, index) => {
-
-        dot.addEventListener('click', function () {
-
-            showSlide(index);
-
-            resetAutoSlide();
-
-        });
-
-    });
-
-
-    /* ===================================================== */
-    /* PAUSE WHEN HOVERING */
-    /* ===================================================== */
-
-    gallery.addEventListener('mouseenter', function () {
-
-        stopAutoSlide();
-
-    });
-
-
-    gallery.addEventListener('mouseleave', function () {
-
-        startAutoSlide();
-
-    });
-
-
-    /* ===================================================== */
-    /* KEYBOARD CONTROLS */
-    /* ===================================================== */
-
-    gallery.addEventListener('keydown', function (event) {
-
-        if (event.key === 'ArrowRight') {
-
-            nextSlide();
-
-            resetAutoSlide();
+            showSlide(currentSlide + 1);
 
         }
 
-        if (event.key === 'ArrowLeft') {
 
-            previousSlide();
+        /* ===================================================== */
+        /* PREVIOUS */
+        /* ===================================================== */
 
-            resetAutoSlide();
+        function previousSlide() {
+
+            showSlide(currentSlide - 1);
 
         }
 
-    });
+
+        /* ===================================================== */
+        /* START AUTO SLIDE */
+        /* ===================================================== */
+
+        function startAutoSlide() {
+
+            stopAutoSlide();
+
+            autoSlide = setInterval(
+                nextSlide,
+                AUTO_SLIDE_TIME
+            );
+
+        }
 
 
-    /* ===================================================== */
-    /* TOUCH / SWIPE SUPPORT */
-    /* ===================================================== */
+        /* ===================================================== */
+        /* STOP AUTO SLIDE */
+        /* ===================================================== */
 
-    let touchStartX = 0;
-    let touchEndX = 0;
+        function stopAutoSlide() {
 
+            if (autoSlide) {
 
-    gallery.addEventListener(
-        'touchstart',
-        function (event) {
+                clearInterval(autoSlide);
 
-            touchStartX =
-                event.changedTouches[0].screenX;
+                autoSlide = null;
 
-        },
-        { passive: true }
-    );
-
-
-    gallery.addEventListener(
-        'touchend',
-        function (event) {
-
-            touchEndX =
-                event.changedTouches[0].screenX;
-
-
-            const swipeDistance =
-                touchEndX - touchStartX;
-
-
-            if (Math.abs(swipeDistance) < 50) {
-                return;
             }
 
+        }
 
-            if (swipeDistance < 0) {
+
+        /* ===================================================== */
+        /* RESET AUTO SLIDE */
+        /* ===================================================== */
+
+        function resetAutoSlide() {
+
+            startAutoSlide();
+
+        }
+
+
+        /* ===================================================== */
+        /* BUTTON EVENTS */
+        /* ===================================================== */
+
+        if (nextButton) {
+
+            nextButton.addEventListener('click', function () {
 
                 nextSlide();
 
-            } else {
+                resetAutoSlide();
+
+            });
+
+        }
+
+
+        if (prevButton) {
+
+            prevButton.addEventListener('click', function () {
 
                 previousSlide();
 
+                resetAutoSlide();
+
+            });
+
+        }
+
+
+        /* ===================================================== */
+        /* DOT EVENTS */
+        /* ===================================================== */
+
+        dots.forEach((dot, index) => {
+
+            dot.addEventListener('click', function () {
+
+                showSlide(index);
+
+                resetAutoSlide();
+
+            });
+
+        });
+
+
+        /* ===================================================== */
+        /* PAUSE WHEN HOVERING */
+        /* ===================================================== */
+
+        gallery.addEventListener('mouseenter', function () {
+
+            stopAutoSlide();
+
+        });
+
+
+        gallery.addEventListener('mouseleave', function () {
+
+            startAutoSlide();
+
+        });
+
+
+        /* ===================================================== */
+        /* KEYBOARD CONTROLS */
+        /* ===================================================== */
+
+        gallery.addEventListener('keydown', function (event) {
+
+            if (event.key === 'ArrowRight') {
+
+                nextSlide();
+
+                resetAutoSlide();
+
             }
 
+            if (event.key === 'ArrowLeft') {
 
-            resetAutoSlide();
+                previousSlide();
 
-        },
-        { passive: true }
-    );
+                resetAutoSlide();
+
+            }
+
+        });
 
 
-    /* ===================================================== */
-    /* INITIALIZE */
-    /* ===================================================== */
+        /* ===================================================== */
+        /* TOUCH / SWIPE SUPPORT */
+        /* ===================================================== */
 
-    showSlide(0);
+        let touchStartX = 0;
+        let touchEndX = 0;
 
-    startAutoSlide();
 
-});
+        gallery.addEventListener(
+            'touchstart',
+            function (event) {
+
+                touchStartX =
+                    event.changedTouches[0].screenX;
+
+            },
+            { passive: true }
+        );
+
+
+        gallery.addEventListener(
+            'touchend',
+            function (event) {
+
+                touchEndX =
+                    event.changedTouches[0].screenX;
+
+
+                const swipeDistance =
+                    touchEndX - touchStartX;
+
+
+                if (Math.abs(swipeDistance) < 50) {
+                    return;
+                }
+
+
+                if (swipeDistance < 0) {
+
+                    nextSlide();
+
+                } else {
+
+                    previousSlide();
+
+                }
+
+
+                resetAutoSlide();
+
+            },
+            { passive: true }
+        );
+
+
+        /* ===================================================== */
+        /* INITIALIZE */
+        /* ===================================================== */
+
+        showSlide(0);
+
+        startAutoSlide();
+
+    });
 
 </script>
 
@@ -782,10 +716,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     <!-- Telugu Wing -->
 
-                    <a
-                        href="{% url 'wings:list' %}"
-                        class="v-wing-card rounded-lg"
-                    >
+                    <a href="{% url 'wings:list' %}" class="v-wing-card rounded-lg">
 
                         <div>
 
@@ -808,7 +739,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         <div class="mt-6 flex justify-end">
 
-                            <span class="text-sm font-medium text-ink transition-transform duration-200 group-hover:translate-x-1">
+                            <span
+                                class="text-sm font-medium text-ink transition-transform duration-200 group-hover:translate-x-1">
                                 &rarr;
                             </span>
 
@@ -819,10 +751,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     <!-- Hindi Wing -->
 
-                    <a
-                        href="{% url 'wings:list' %}"
-                        class="v-wing-card rounded-lg"
-                    >
+                    <a href="{% url 'wings:list' %}" class="v-wing-card rounded-lg">
 
                         <div>
 
@@ -845,7 +774,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         <div class="mt-6 flex justify-end">
 
-                            <span class="text-sm font-medium text-ink transition-transform duration-200 group-hover:translate-x-1">
+                            <span
+                                class="text-sm font-medium text-ink transition-transform duration-200 group-hover:translate-x-1">
                                 &rarr;
                             </span>
 
@@ -856,10 +786,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     <!-- English Wing -->
 
-                    <a
-                        href="{% url 'wings:list' %}"
-                        class="v-wing-card rounded-lg"
-                    >
+                    <a href="{% url 'wings:list' %}" class="v-wing-card rounded-lg">
 
                         <div>
 
@@ -882,7 +809,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         <div class="mt-6 flex justify-end">
 
-                            <span class="text-sm font-medium text-ink transition-transform duration-200 group-hover:translate-x-1">
+                            <span
+                                class="text-sm font-medium text-ink transition-transform duration-200 group-hover:translate-x-1">
                                 &rarr;
                             </span>
 
@@ -893,29 +821,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     <!-- Content Team -->
 
-                    <a
-                        href="{% url 'wings:list' %}"
-                        class="v-wing-card rounded-lg"
-                    >
+                    <a href="{% url 'wings:list' %}" class="v-wing-card rounded-lg">
 
                         <div>
 
                             <div class="text-3xl md:text-4xl text-ink font-semibold mb-2">
 
-                                <svg
-                                    class="w-8 h-8 md:w-9 md:h-9"
-                                    fill="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
+                                <svg class="w-8 h-8 md:w-9 md:h-9" fill="currentColor" viewBox="0 0 24 24">
+
+                                    <path d="M12 2l2.5 7.5H22l-6 4.5 2.5 7.5-6.5-5-6.5 5 2.5-7.5-6-4.5h7.5z"
+                                        opacity="0.1" />
 
                                     <path
-                                        d="M12 2l2.5 7.5H22l-6 4.5 2.5 7.5-6.5-5-6.5 5 2.5-7.5-6-4.5h7.5z"
-                                        opacity="0.1"
-                                    />
-
-                                    <path
-                                        d="M3 21l3.75-1.25L18.5 8 16 5.5 4.25 17.25 3 21z M17.75 3.75c.39-.39 1.02-.39 1.41 0l1.09 1.09c.39.39.39 1.02 0 1.41l-1.34 1.34-2.5-2.5 1.34-1.34z"
-                                    />
+                                        d="M3 21l3.75-1.25L18.5 8 16 5.5 4.25 17.25 3 21z M17.75 3.75c.39-.39 1.02-.39 1.41 0l1.09 1.09c.39.39.39 1.02 0 1.41l-1.34 1.34-2.5-2.5 1.34-1.34z" />
 
                                 </svg>
 
@@ -937,7 +855,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         <div class="mt-6 flex justify-end">
 
-                            <span class="text-sm font-medium text-ink transition-transform duration-200 group-hover:translate-x-1">
+                            <span
+                                class="text-sm font-medium text-ink transition-transform duration-200 group-hover:translate-x-1">
                                 &rarr;
                             </span>
 
@@ -964,10 +883,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         Featured Publications
                     </h2>
 
-                    <a
-                        href="{% url 'publications:list' %}"
-                        class="v-btn-link text-xs"
-                    >
+                    <a href="{% url 'publications:list' %}" class="v-btn-link text-xs">
                         VIEW ALL &rarr;
                     </a>
 
@@ -982,15 +898,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         <!-- Publication Cover -->
 
-                        <div class="md:col-span-5 aspect-[4/5] bg-ink rounded overflow-hidden flex items-center justify-center text-white relative">
+                        <div
+                            class="md:col-span-5 aspect-[4/5] bg-ink rounded overflow-hidden flex items-center justify-center text-white relative">
 
                             {% if pub.cover_image %}
 
-                            <img
-                                src="{{ pub.cover_image.url }}"
-                                alt="{{ pub.title }}"
-                                class="w-full h-full object-cover"
-                            >
+                            <img src="{{ pub.cover_image.url }}" alt="{{ pub.title }}"
+                                class="w-full h-full object-cover">
 
                             {% else %}
 
@@ -1061,10 +975,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                             <div class="mt-6">
 
-                                <a
-                                    href="{{ pub.get_absolute_url }}"
-                                    class="v-btn-link"
-                                >
+                                <a href="{{ pub.get_absolute_url }}" class="v-btn-link">
                                     READ MORE &rarr;
                                 </a>
 
@@ -1104,13 +1015,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
             <div class="md:col-span-3 flex justify-center md:justify-start">
 
-                <div class="relative w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden border-2 border-white/20 shadow-2xl">
+                <div
+                    class="relative w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden border-2 border-white/20 shadow-2xl">
 
-                    <img
-                        src="{% static 'img/tagore-portrait.jpg' %}"
-                        alt="Rabindranath Tagore Portrait"
-                        class="w-full h-full object-cover filter grayscale contrast-125"
-                    >
+                    <img src="{% static 'img/tagore-portrait.jpg' %}" alt="Rabindranath Tagore Portrait"
+                        class="w-full h-full object-cover filter grayscale contrast-125">
 
                 </div>
 
@@ -1125,11 +1034,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     “
                 </div>
 
-                <blockquote class="font-serif text-xl sm:text-2xl md:text-3xl text-white/95 leading-relaxed font-normal">
-                    You can't cross the sea merely by standing and staring at the water. You have to gather courage and jump.
+                <blockquote
+                    class="font-serif text-xl sm:text-2xl md:text-3xl text-white/95 leading-relaxed font-normal">
+                    You can't cross the sea merely by standing and staring at the water. You have to gather courage and
+                    jump.
                 </blockquote>
 
-                <cite class="mt-4 block text-xs md:text-sm font-sans tracking-widest text-white/60 uppercase not-italic">
+                <cite
+                    class="mt-4 block text-xs md:text-sm font-sans tracking-widest text-white/60 uppercase not-italic">
                     — Rabindranath Tagore
                 </cite>
 
@@ -1142,30 +1054,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 <div class="border border-white/10 p-4 rounded-lg bg-white/5 backdrop-blur-sm text-center">
 
-                    <svg
-                        class="w-24 h-24 text-white/70 mx-auto"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1"
-                    >
+                    <svg class="w-24 h-24 text-white/70 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1">
 
-                        <path
-                            d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        />
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke-linecap="round" stroke-linejoin="round" />
 
-                        <path
-                            d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        />
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke-linecap="round"
+                            stroke-linejoin="round" />
 
-                        <path
-                            d="M8 6h8M8 10h8"
-                            stroke-linecap="round"
-                        />
+                        <path d="M8 6h8M8 10h8" stroke-linecap="round" />
 
                     </svg>
 
@@ -1209,10 +1106,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             </div>
 
-            <a
-                href="{% url 'events:list' %}"
-                class="v-btn-link text-xs"
-            >
+            <a href="{% url 'events:list' %}" class="v-btn-link text-xs">
                 VIEW ALL EVENTS &rarr;
             </a>
 
@@ -1223,7 +1117,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             {% for event in upcoming_events %}
 
-                {% include "components/event_card.html" with event=event %}
+            {% include "components/event_card.html" with event=event %}
 
             {% endfor %}
 
