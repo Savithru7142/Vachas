@@ -133,8 +133,10 @@ us.{% endblock %}
     <!-- ===================================================== -->
     <!-- FULL WIDTH SLIDESHOW -->
     <!-- ===================================================== -->
+     <div class="relative w-full overflow-visible"
+     style="position:relative; overflow:visible;">
 
-    <div id="vachas-gallery" class="relative w-full overflow-hidden group" style="height: 68vh; min-height: 600px;"
+    <div id="vachas-gallery" class="relative w-full overflow-hidden group" style="height: 68vh; min-height: 540px;"
         tabindex="0" aria-roledescription="carousel" aria-label="Vachas Literature Club gallery">
 
         {% for item in gallery_items %}
@@ -148,9 +150,11 @@ us.{% endblock %}
                 {% else %}
                     opacity-0 scale-[1.06] z-0 pointer-events-none
                 {% endif %}
-            " data-slide="{{ forloop.counter0 }}" role="group" aria-roledescription="slide"
-            aria-label="Slide {{ forloop.counter }} of {{ gallery_items|length }}" {% if not forloop.first
-            %}aria-hidden="true" >
+            " data-slide="{{ forloop.counter0 }}"
+            role="group"
+            aria-roledescription="slide"
+            aria-label="Slide {{ forloop.counter }} of {{ gallery_items|length }}"
+            {% if not forloop.first %}aria-hidden="true"{% endif %}>
 
             {% if item.image %}
 
@@ -158,7 +162,7 @@ us.{% endblock %}
                     absolute inset-0
                     w-full h-full
                     object-cover
-                    transition-transform duration-[1200ms] ease-out
+                    transition-transform duration-[1000ms] ease-out
                     {% if forloop.first %}
                         scale-100
                     {% else %}
@@ -227,54 +231,72 @@ us.{% endblock %}
 
         {% if gallery_items|length > 1 %}
 
-        <button type="button" id="gallery-prev" class="
-                absolute left-5 md:left-8 top-1/2 -translate-y-1/2 z-30
-                w-12 h-12 md:w-14 md:h-14
-                rounded-full
-                border border-white/30
-                bg-black/30
-                backdrop-blur-md
-                text-white
-                flex items-center justify-center
-                opacity-100 pointer-events-auto
-                hover:bg-white hover:text-black
-                hover:border-white
-                hover:scale-110
-                transition-all duration-300
-            " aria-label="Previous image">
-
-            <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7" />
-            </svg>
-
-        </button>
+               <button
+    type="button"
+    id="gallery-prev"
+    aria-label="Previous slide"
+    style="
+        position:absolute;
+        left:25px;
+        top:50%;
+        transform:translateY(-50%);
+        width:60px;
+        height:60px;
+        border-radius:50%;
+        border:2px solid white;
+        background:#000000;
+        color:white;
+        display:flex !important;
+        align-items:center;
+        justify-content:center;
+        opacity:1 !important;
+        visibility:visible !important;
+        pointer-events:auto !important;
+        z-index:99999 !important;
+        cursor:pointer;
+        box-shadow:0 4px 15px rgba(0,0,0,0.5);
+        font-size:32px;
+        line-height:1;
+    "
+>
+    &#10094;
+</button>
 
 
         <!-- ================================================= -->
         <!-- NEXT BUTTON -->
         <!-- ================================================= -->
 
-        <button type="button" id="gallery-next" class="
-                absolute right-5 md:right-8 top-1/2 -translate-y-1/2 z-30
-                w-12 h-12 md:w-14 md:h-14
-                rounded-full
-                border border-white/30
-                bg-black/30
-                backdrop-blur-md
-                text-white
-                flex items-center justify-center
-                opacity-100 pointer-events-auto
-                hover:bg-white hover:text-black
-                hover:border-white
-                hover:scale-110
-                transition-all duration-300
-            " aria-label="Next image">
-
-            <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7" />
-            </svg>
-
-        </button>
+                    <button
+    type="button"
+    id="gallery-next"
+    aria-label="Next slide"
+    style="
+        position:absolute;
+        right:25px;
+        top:50%;
+        transform:translateY(-50%);
+        width:60px;
+        height:60px;
+        border-radius:50%;
+        border:2px solid white;
+        background:#000000;
+        color:white;
+        display:flex !important;
+        align-items:center;
+        justify-content:center;
+        opacity:1 !important;
+        visibility:visible !important;
+        pointer-events:auto !important;
+        z-index:99999 !important;
+        cursor:pointer;
+        box-shadow:0 4px 15px rgba(0,0,0,0.5);
+        font-size:32px;
+        line-height:1;
+    "
+>
+    &#10095;
+</button>
 
 
         <!-- ================================================= -->
