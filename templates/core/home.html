@@ -134,7 +134,7 @@ us.{% endblock %}
     <!-- FULL WIDTH SLIDESHOW -->
     <!-- ===================================================== -->
 
-    <div id="vachas-gallery" class="relative w-full overflow-hidden group" style="height: 58vh; min-height: 500px;"
+    <div id="vachas-gallery" class="relative w-full overflow-hidden group" style="height: 68vh; min-height: 600px;"
         tabindex="0" aria-roledescription="carousel" aria-label="Vachas Literature Club gallery">
 
         {% for item in gallery_items %}
@@ -157,8 +157,8 @@ us.{% endblock %}
             <img src="{{ item.image.url }}" alt="{{ item.title|default:'Vachas Literature Club' }}" class="
                     absolute inset-0
                     w-full h-full
-                    object-fill
-                    transition-transform duration-[3000ms] ease-out
+                    object-cover
+                    transition-transform duration-[1200ms] ease-out
                     {% if forloop.first %}
                         scale-100
                     {% else %}
@@ -236,8 +236,7 @@ us.{% endblock %}
                 backdrop-blur-md
                 text-white
                 flex items-center justify-center
-                opacity-80 md:opacity-0
-                group-hover:opacity-100
+                opacity-100 pointer-events-auto
                 hover:bg-white hover:text-black
                 hover:border-white
                 hover:scale-110
@@ -264,8 +263,7 @@ us.{% endblock %}
                 backdrop-blur-md
                 text-white
                 flex items-center justify-center
-                opacity-80 md:opacity-0
-                group-hover:opacity-100
+                opacity-100 pointer-events-auto
                 hover:bg-white hover:text-black
                 hover:border-white
                 hover:scale-110
