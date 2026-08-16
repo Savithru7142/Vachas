@@ -6,7 +6,8 @@
 {% block content %}
 <div class="space-y-8 max-w-6xl">
     <!-- Quote Banner Card (Matching design) -->
-    <div class="border border-line bg-white rounded-xl p-6 sm:p-8 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+    <div
+        class="border border-line bg-white rounded-xl p-6 sm:p-8 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
         <div class="max-w-xl z-10">
             <div class="text-3xl text-smoke/40 font-serif leading-none mb-2">“</div>
             <p class="font-serif text-lg sm:text-xl md:text-2xl text-ink leading-relaxed italic">
@@ -14,15 +15,16 @@
             </p>
         </div>
         <div class="shrink-0 flex items-center justify-center p-4 bg-paper-warm/60 rounded-xl border border-line/60">
-            <svg class="w-16 h-16 sm:w-20 sm:h-20 text-ink/80" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
+            <svg class="w-16 h-16 sm:w-20 sm:h-20 text-ink/80" viewBox="0 0 64 64" fill="none" stroke="currentColor"
+                stroke-width="1.5">
                 <!-- Ink Bottle -->
-                <path d="M38 42h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H38a2 2 0 0 1-2-2V44a2 2 0 0 1 2-2z" fill="#f5f3ef"/>
-                <path d="M42 38h8v4h-8z" fill="#2b2b2b"/>
-                <circle cx="46" cy="51" r="4" fill="#0a0a0a"/>
+                <path d="M38 42h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H38a2 2 0 0 1-2-2V44a2 2 0 0 1 2-2z" fill="#f5f3ef" />
+                <path d="M42 38h8v4h-8z" fill="#2b2b2b" />
+                <circle cx="46" cy="51" r="4" fill="#0a0a0a" />
                 <!-- Quill Feather & Nib dipping -->
-                <path d="M12 10 C24 16, 38 28, 44 46" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round"/>
-                <path d="M12 10 C20 10, 32 18, 36 28 C28 26, 20 20, 12 10 Z" fill="#0a0a0a" opacity="0.85"/>
-                <path d="M44 46 L46 51" stroke="#0a0a0a" stroke-width="2"/>
+                <path d="M12 10 C24 16, 38 28, 44 46" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round" />
+                <path d="M12 10 C20 10, 32 18, 36 28 C28 26, 20 20, 12 10 Z" fill="#0a0a0a" opacity="0.85" />
+                <path d="M44 46 L46 51" stroke="#0a0a0a" stroke-width="2" />
             </svg>
         </div>
     </div>
@@ -49,211 +51,175 @@
 
     <!-- Main Dashboard Grid (Upcoming Event + Latest Announcement) -->
     <div class="grid gap-8 lg:grid-cols-2">
-                    <!-- Upcoming Event Card -->
-            <div class="space-y-4">
-                <div class="flex items-center justify-between">
-                    <h2 class="font-serif text-xl text-ink font-semibold">
-                        Upcoming Event
-                    </h2>
-                </div>
+        <!-- Upcoming Event Card -->
+        <div class="space-y-4">
+            <div class="flex items-center justify-between">
+                <h2 class="font-serif text-xl text-ink font-semibold">
+                    Upcoming Event
+                </h2>
+            </div>
 
-                {% if events %}
-                    {% with ev=events.0 %}
+            {% if events %}
+            {% with ev=events.0 %}
 
-                    <div class="border border-line bg-white rounded-xl overflow-hidden shadow-sm flex flex-col sm:flex-row">
+            <div class="border border-line bg-white rounded-xl overflow-hidden shadow-sm flex flex-col sm:flex-row">
 
-                        <!-- Event Details -->
-                        <div class="p-6 flex-1 flex flex-col justify-between">
-                            <div>
-                                <h3 class="font-serif text-xl text-ink font-bold">
-                                    {{ ev.title }}
-                                </h3>
+                <!-- Event Details -->
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-serif text-xl text-ink font-bold">
+                            {{ ev.title }}
+                        </h3>
 
-                                <div class="mt-4 space-y-2 text-xs text-smoke font-sans">
+                        <div class="mt-4 space-y-2 text-xs text-smoke font-sans">
 
-                                    <!-- Date -->
-                                    <div class="flex items-center gap-2">
-                                        <svg
-                                            class="w-4 h-4 text-ink/70"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <path
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                stroke-width="2"
-                                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                                            />
-                                        </svg>
+                            <!-- Date -->
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-ink/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
 
-                                        <span>
-                                            {{ ev.date|date:"d M Y" }}
-                                        </span>
-                                    </div>
-
-                                    <!-- Time -->
-                                    <div class="flex items-center gap-2">
-                                        <svg
-                                            class="w-4 h-4 text-ink/70"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <path
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                stroke-width="2"
-                                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                                            />
-                                        </svg>
-
-                                        <span>
-                                            {{ ev.date|time:"g:i A" }}
-                                        </span>
-                                    </div>
-
-                                    <!-- Venue -->
-                                    {% if ev.venue %}
-                                    <div class="flex items-center gap-2">
-                                        <svg
-                                            class="w-4 h-4 text-ink/70"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <path
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                stroke-width="2"
-                                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                                            />
-                                        </svg>
-
-                                        <span>
-                                            {{ ev.venue }}
-                                        </span>
-                                    </div>
-                                    {% endif %}
-
-                                </div>
+                                <span>
+                                    {{ ev.date|date:"d M Y" }}
+                                </span>
                             </div>
 
-                            <!-- View Details -->
-                            <div class="mt-6">
-                                <a
-                                    href="{{ ev.get_absolute_url }}"
-                                    class="v-btn-sm v-btn"
-                                >
-                                    VIEW DETAILS
-                                </a>
+                            <!-- Time -->
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-ink/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+
+                                <span>
+                                    {{ ev.date|time:"g:i A" }}
+                                </span>
                             </div>
-                        </div>
 
-                        <!-- Event Poster -->
-                        <div class="sm:w-48 bg-[#111111] flex items-center justify-center p-6 text-white min-h-[160px]">
+                            <!-- Venue -->
+                            {% if ev.venue %}
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-ink/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                </svg>
 
-                            {% if ev.poster %}
-
-                                <img
-                                    src="{{ ev.poster.url }}"
-                                    alt="{{ ev.title }}"
-                                    class="w-full h-full object-cover"
-                                >
-
-                            {% else %}
-
-                                <div class="text-center">
-
-                                    <svg
-                                        class="w-10 h-10 mx-auto text-white/50 mb-2"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="1.5"
-                                            d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 100-6 3 3 0 000 6z"
-                                        />
-                                    </svg>
-
-                                    <span class="font-serif text-xs uppercase tracking-wider text-white/80">
-                                        {{ ev.title|truncatewords:2 }}
-                                    </span>
-
-                                </div>
-
+                                <span>
+                                    {{ ev.venue }}
+                                </span>
+                            </div>
                             {% endif %}
 
                         </div>
+                    </div>
+
+                    <!-- View Details -->
+                    <div class="mt-6">
+                        <a href="{{ ev.get_absolute_url }}" class="v-btn-sm v-btn">
+                            VIEW DETAILS
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Event Poster -->
+                <div class="sm:w-48 bg-[#111111] flex items-center justify-center p-6 text-white min-h-[160px]">
+
+                    {% if ev.poster %}
+
+                    <img src="{{ ev.poster.url }}" alt="{{ ev.title }}" class="w-full h-full object-cover">
+
+                    {% else %}
+
+                    <div class="text-center">
+
+                        <svg class="w-10 h-10 mx-auto text-white/50 mb-2" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 100-6 3 3 0 000 6z" />
+                        </svg>
+
+                        <span class="font-serif text-xs uppercase tracking-wider text-white/80">
+                            {{ ev.title|truncatewords:2 }}
+                        </span>
 
                     </div>
 
-                    {% endwith %}
+                    {% endif %}
 
-                {% else %}
+                </div>
 
-                    <!-- No Events -->
-                    <div class="border border-line bg-white rounded-xl p-8 shadow-sm text-center">
-
-                        <p class="font-serif text-lg text-ink">
-                            No events yet
-                        </p>
-
-                        <p class="mt-2 text-xs text-smoke">
-                            Check back soon for upcoming events.
-                        </p>
-
-                    </div>
-
-                {% endif %}
             </div>
+
+            {% endwith %}
+
+            {% else %}
+
+            <!-- No Events -->
+            <div class="border border-line bg-white rounded-xl p-8 shadow-sm text-center">
+
+                <p class="font-serif text-lg text-ink">
+                    No events yet
+                </p>
+
+                <p class="mt-2 text-xs text-smoke">
+                    Check back soon for upcoming events.
+                </p>
+
+            </div>
+
+            {% endif %}
+        </div>
 
         <!-- Latest Announcement Card (Matching design) -->
         <div class="space-y-4">
             <h2 class="font-serif text-xl text-ink font-semibold">Latest Announcement</h2>
 
             {% if announcements %}
-                {% with ann=announcements.0 %}
-                <div class="border border-line bg-white rounded-xl p-6 shadow-sm flex items-start gap-4">
-                    <div class="shrink-0 p-3 bg-paper-warm rounded-lg text-ink">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
-                        </svg>
-                    </div>
-                    <div class="flex-1">
-                        <h3 class="font-bold text-ink text-sm">{{ ann.title }}</h3>
-                        <p class="mt-1 text-xs text-smoke leading-relaxed">{{ ann.body|truncatewords:20 }}</p>
-                        <span class="mt-3 inline-block text-[11px] font-mono text-smoke/70">{{ ann.published_at|timesince }} ago</span>
-                    </div>
+            {% with ann=announcements.0 %}
+            <div class="border border-line bg-white rounded-xl p-6 shadow-sm flex items-start gap-4">
+                <div class="shrink-0 p-3 bg-paper-warm rounded-lg text-ink">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+                    </svg>
                 </div>
-                {% endwith %}
+                <div class="flex-1">
+                    <h3 class="font-bold text-ink text-sm">{{ ann.title }}</h3>
+                    <p class="mt-1 text-xs text-smoke leading-relaxed">{{ ann.body|truncatewords:20 }}</p>
+                    <span class="mt-3 inline-block text-[11px] font-mono text-smoke/70">{{ ann.published_at|timesince }}
+                        ago</span>
+                </div>
+            </div>
+            {% endwith %}
             {% else %}
-                <div class="border border-line bg-white rounded-xl p-6 shadow-sm flex items-start gap-4">
-                    <div class="shrink-0 p-3 bg-paper-warm rounded-lg text-ink">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
-                        </svg>
-                    </div>
-                    <div class="flex-1">
-                        <h3 class="font-bold text-ink text-sm">Open Mic Registrations Now Open!</h3>
-                        <p class="mt-1 text-xs text-smoke leading-relaxed">Showcase your talent at our annual Open Mic event.</p>
-                        <span class="mt-3 inline-block text-[11px] font-mono text-smoke/70">2 days ago</span>
-                    </div>
+            <div class="border border-line bg-white rounded-xl p-6 shadow-sm flex items-start gap-4">
+                <div class="shrink-0 p-3 bg-paper-warm rounded-lg text-ink">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+                    </svg>
                 </div>
+                <div class="flex-1">
+                    <h3 class="font-bold text-ink text-sm">Open Mic Registrations Now Open!</h3>
+                    <p class="mt-1 text-xs text-smoke leading-relaxed">Showcase your talent at our annual Open Mic
+                        event.</p>
+                    <span class="mt-3 inline-block text-[11px] font-mono text-smoke/70">2 days ago</span>
+                </div>
+            </div>
             {% endif %}
 
             <!-- Tasks List Preview -->
             <div class="border border-line bg-white rounded-xl p-6 shadow-sm">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="font-serif text-lg text-ink font-semibold">Your Assigned Tasks</h3>
-                    <a href="{% url 'member:tasks' %}" class="text-xs uppercase font-medium text-ink hover:underline">View All &rarr;</a>
+                    <a href="{% url 'member:tasks' %}"
+                        class="text-xs uppercase font-medium text-ink hover:underline">View All &rarr;</a>
                 </div>
                 {% for task in tasks %}
                 <div class="border-b border-line py-2.5 last:border-0 flex items-center justify-between text-xs">
-                    <a href="{% url 'member:task_detail' task.pk %}" class="font-medium hover:underline text-ink">{{ task.title }}</a>
+                    <a href="{% url 'member:task_detail' task.pk %}" class="font-medium hover:underline text-ink">{{
+                        task.title }}</a>
                     <span class="v-badge-outline">{{ task.get_status_display }}</span>
                 </div>
                 {% empty %}

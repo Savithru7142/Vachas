@@ -54,6 +54,186 @@
         </div>
     </div>
 </section>
+<!-- LITERATURE CLUB GALLERY -->
+{% if gallery_items %}
+<section class="v-section bg-paper border-b border-line">
+    <div class="v-container">
+
+        <!-- Gallery Heading -->
+        <div class="flex items-end justify-between mb-8">
+            <div>
+                <p class="text-xs uppercase tracking-widest text-smoke font-mono">
+                    Moments & Expressions
+                </p>
+                <h2 class="font-serif text-3xl md:text-4xl text-ink">
+                    Life at Vachas
+                </h2>
+            </div>
+
+            <div class="hidden sm:block text-xs text-smoke font-mono">
+                LITERATURE • ART • COMMUNITY
+            </div>
+        </div>
+
+        <!-- Slideshow -->
+        <div class="relative overflow-hidden rounded-xl border border-line bg-white shadow-sm">
+
+            <div id="vachas-gallery" class="relative">
+
+                {% for item in gallery_items %}
+                <div class="gallery-slide {% if forloop.first %}block{% else %}hidden{% endif %}">
+
+                    {% if item.image %}
+                    <img
+                        src="{{ item.image.url }}"
+                        alt="{{ item.title|default:'Vachas Literature Club' }}"
+                        class="w-full h-[280px] sm:h-[380px] md:h-[480px] object-cover"
+                    >
+                    {% endif %}
+
+                    {% if item.title %}
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 sm:p-8">
+                        <h3 class="font-serif text-xl sm:text-2xl text-white">
+                            {{ item.title }}
+                        </h3>
+
+                        {% if item.caption %}
+                        <p class="mt-1 text-sm text-white/75">
+                            {{ item.caption }}
+                        </p>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+
+                </div>
+                {% endfor %}
+
+            </div>
+
+            <!-- Previous Button -->
+            {% if gallery_items|length > 1 %}
+            <button
+                type="button"
+                id="gallery-prev"
+                class="absolute left-4 top-1/2 -translate-y-1/2
+                       w-10 h-10 rounded-full
+                       bg-black/50 text-white
+                       hover:bg-black/75 transition
+                       flex items-center justify-center"
+                aria-label="Previous image"
+            >
+                &larr;
+            </button>
+
+            <!-- Next Button -->
+            <button
+                type="button"
+                id="gallery-next"
+                class="absolute right-4 top-1/2 -translate-y-1/2
+                       w-10 h-10 rounded-full
+                       bg-black/50 text-white
+                       hover:bg-black/75 transition
+                       flex items-center justify-center"
+                aria-label="Next image"
+            >
+                &rarr;
+            </button>
+            {% endif %}
+
+        </div>
+
+        <!-- Slide Dots -->
+        {% if gallery_items|length > 1 %}
+        <div class="flex justify-center gap-2 mt-5" id="gallery-dots">
+            {% for item in gallery_items %}
+            <button
+                type="button"
+                class="gallery-dot h-2 w-2 rounded-full transition-all
+                       {% if forloop.first %}bg-ink{% else %}bg-line{% endif %}"
+                data-slide="{{ forloop.counter0 }}"
+                aria-label="Go to slide {{ forloop.counter }}"
+            ></button>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+    </div>
+</section>
+
+<!-- Gallery JavaScript -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const slides = document.querySelectorAll('.gallery-slide');
+    const dots = document.querySelectorAll('.gallery-dot');
+    const prevButton = document.getElementById('gallery-prev');
+    const nextButton = document.getElementById('gallery-next');
+
+    if (slides.length <= 1) {
+        return;
+    }
+
+    let currentSlide = 0;
+    let autoSlide;
+
+    function showSlide(index) {
+
+        currentSlide = (index + slides.length) % slides.length;
+
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('hidden', i !== currentSlide);
+            slide.classList.toggle('block', i === currentSlide);
+        });
+
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('bg-ink', i === currentSlide);
+            dot.classList.toggle('bg-line', i !== currentSlide);
+        });
+    }
+
+    function nextSlide() {
+        showSlide(currentSlide + 1);
+    }
+
+    function previousSlide() {
+        showSlide(currentSlide - 1);
+    }
+
+    function startAutoSlide() {
+        autoSlide = setInterval(nextSlide, 5000);
+    }
+
+    function resetAutoSlide() {
+        clearInterval(autoSlide);
+        startAutoSlide();
+    }
+
+    if (nextButton) {
+        nextButton.addEventListener('click', function () {
+            nextSlide();
+            resetAutoSlide();
+        });
+    }
+
+    if (prevButton) {
+        prevButton.addEventListener('click', function () {
+            previousSlide();
+            resetAutoSlide();
+        });
+    }
+
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', function () {
+            showSlide(index);
+            resetAutoSlide();
+        });
+    });
+
+    showSlide(0);
+    startAutoSlide();
+});
+</script>
+{% endif %}
 
 <!-- WINGS & FEATURED PUBLICATIONS SECTION -->
 <section id="wings" class="v-section bg-paper">
